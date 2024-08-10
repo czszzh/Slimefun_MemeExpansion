@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.czssj</groupId>
     <artifactId>sj_Expansion</artifactId>
-    <version>1.0.0</version>
+    <version>_test</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -53,6 +53,12 @@
             <version>1.17.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+   
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.2</version>
+        </dependency>
 
         <dependency>
             <groupId>com.github.Slimefun</groupId>
@@ -66,5 +72,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>24.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 </project>
