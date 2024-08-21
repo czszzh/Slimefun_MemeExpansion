@@ -4,6 +4,6 @@
 
 必要前置:
 - Slimefun
-- RykenSlimefunCustomizer
+- HaimanTech2-rsc
 - InfinityExpansion
 - FluffyMachines
