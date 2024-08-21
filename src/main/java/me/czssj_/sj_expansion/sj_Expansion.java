@@ -27,12 +27,14 @@ public class sj_Expansion extends JavaPlugin implements SlimefunAddon
     }
 
     @Override
-    public void onDisable() {
+    public void onDisable() 
+    {
         // Logic for disabling the plugin...
     }
 
     @Override
-    public String getBugTrackerURL() {
+    public String getBugTrackerURL() 
+    {
         // You can return a link to your Bug Tracker instead of null here
         return null;
     }
@@ -46,7 +48,8 @@ public class sj_Expansion extends JavaPlugin implements SlimefunAddon
         return this;
     }
 
-    public static sj_Expansion getInstance() {
+    public static sj_Expansion getInstance() 
+    {
         return instance;
     }
 }

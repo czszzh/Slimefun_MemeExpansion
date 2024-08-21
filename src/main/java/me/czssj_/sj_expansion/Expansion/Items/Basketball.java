@@ -5,6 +5,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.groups.SubItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 
 import org.bukkit.Sound;
@@ -21,7 +22,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Random;
 
-public class Basketball extends SlimefunItem implements Listener
+public class Basketball extends SlimefunItem implements NotPlaceable, Listener
 {
     private Random random = new Random();
 
@@ -33,6 +34,7 @@ public class Basketball extends SlimefunItem implements Listener
     @Override
     public void preRegister() 
     {
+        addItemHandler((ItemUseHandler) PlayerRightClickEvent::cancel);
         ItemUseHandler itemUseHandler = this::itemRightClick;
         addItemHandler(itemUseHandler);
         JavaPlugin plugin = JavaPlugin.getProvidingPlugin(Basketball.class);
@@ -44,6 +46,7 @@ public class Basketball extends SlimefunItem implements Listener
         Player p = event.getPlayer();
         p.launchProjectile(Snowball.class);
         p.playSound(p.getLocation(), Sound.ENTITY_EGG_THROW, SoundCategory.MASTER, 1.0f, 1.0f);
+        event.cancel();
     }
 
     @EventHandler
@@ -54,7 +57,7 @@ public class Basketball extends SlimefunItem implements Listener
             if (event.getHitEntity() instanceof LivingEntity && !(event.getHitEntity() instanceof Player)) {
                 LivingEntity hitEntity = (LivingEntity) event.getHitEntity();
                 hitEntity.damage(0.25);
-                if (random.nextDouble() < 0.01)
+                if (random.nextDouble() < 0.025)
                 {
                     hitEntity.getWorld().spawnEntity(hitEntity.getLocation(), EntityType.CHICKEN);
                     hitEntity.remove();

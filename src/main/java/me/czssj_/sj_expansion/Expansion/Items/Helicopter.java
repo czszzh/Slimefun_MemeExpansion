@@ -5,18 +5,14 @@ import io.github.thebusybiscuit.slimefun4.api.items.groups.SubItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import me.czssj_.sj_expansion.setup.sj_Expansion_item;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -24,18 +20,19 @@ import org.bukkit.util.Vector;
 
 import java.util.Random;
 
-public class Helicopter extends SlimefunItem
+public class Helicopter extends SlimefunItem implements NotPlaceable
 {
-    private Random random = new Random();
+    private final Random random = new Random();
 
     public Helicopter(SubItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe)
     {
         super(itemGroup, item, recipeType, recipe);
     }
-
+    
     @Override
     public void preRegister()
     {
+        addItemHandler((ItemUseHandler) PlayerRightClickEvent::cancel);
         ItemUseHandler itemUseHandler = this::itemRightClick;
         addItemHandler(itemUseHandler);
     }
@@ -48,7 +45,7 @@ public class Helicopter extends SlimefunItem
             SlimefunItem sfItem = SlimefunItem.getByItem(helmet);
             if (sfItem != null && sfItem.getId().equals("KOBE"))
             {
-                if (random.nextDouble() < 0.02)
+                if (random.nextDouble() < 0.05)
                 {
                     event.getPlayer().removePotionEffect(PotionEffectType.LEVITATION);
                     Vector velocity = event.getPlayer().getVelocity();
@@ -57,6 +54,7 @@ public class Helicopter extends SlimefunItem
                     event.getPlayer().setHealth(0);
                     event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 1.0f, 1.0f);
                     Bukkit.broadcastMessage(event.getPlayer().getName() + " 坠机身亡");
+                    event.getPlayer().getInventory().setHelmet(sj_Expansion_item.MAMBA_SPIRIT);
                 }
                 else
                 {
@@ -72,5 +70,6 @@ public class Helicopter extends SlimefunItem
         {
             event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 5, 4));
         }
+        event.cancel();
     }
 }

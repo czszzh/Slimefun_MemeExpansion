@@ -7,6 +7,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.NotHopperable;
 import me.czssj_.sj_expansion.setup.sj_Expansion_item;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.inventory.InvUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
@@ -61,20 +62,6 @@ public class Expansion_Brewing_Stand extends AContainer implements NotHopperable
         return 400;
     }
 
-    /*
-    @Override
-    protected void registerDefaultRecipes() 
-    {
-        //粗制的药水
-        ItemStack AWKWARD_POTION = new ItemStack(Material.POTION, 1);
-        PotionMeta AWKWARD_POTION_META = (PotionMeta) AWKWARD_POTION.getItemMeta();
-        AWKWARD_POTION_META.setBasePotionData(new PotionData(PotionType.AWKWARD, false, false));
-        AWKWARD_POTION.setItemMeta(AWKWARD_POTION_META);
-
-        registerRecipe(30, new ItemStack[] { new ItemStack(Material.POTION,1), new ItemStack(Material.EMERALD, 1) }, new ItemStack[] { sj_Expansion_item.BAD_OMEN_POTION });
-    }
-    */
-
     private static final Map<Material, PotionType> potionRecipes = new EnumMap<>(Material.class);
     private static final Map<PotionType, PotionType> fermentations = new EnumMap<>(PotionType.class);
 
@@ -103,6 +90,13 @@ public class Expansion_Brewing_Stand extends AContainer implements NotHopperable
     {
         ItemStack input1 = menu.getItemInSlot(getInputSlots()[0]);
         ItemStack input2 = menu.getItemInSlot(getInputSlots()[1]);
+        ItemStack output1 = menu.getItemInSlot(getOutputSlots()[0]);
+        ItemStack output2 = menu.getItemInSlot(getOutputSlots()[1]);
+
+        if(output1 != null && output2 != null)
+        {
+            return null;
+        }
 
         if (input1 == null || input2 == null)
         {
@@ -111,7 +105,7 @@ public class Expansion_Brewing_Stand extends AContainer implements NotHopperable
 
         if (isPotion(input1.getType()) || isPotion(input2.getType()))
         {
-            if (input1.getType() == Material.POTION && input2.getType() == Material.EMERALD) 
+            if (input1.getType() == Material.POTION && isVillagerSoul(input2)) 
             {
                 PotionMeta potionMeta = (PotionMeta) input1.getItemMeta();
                 PotionData potionData = potionMeta.getBasePotionData();
@@ -119,10 +113,10 @@ public class Expansion_Brewing_Stand extends AContainer implements NotHopperable
                 {
                     menu.consumeItem(getInputSlots()[0],1);
                     menu.consumeItem(getInputSlots()[1],1);
-                    return new MachineRecipe(20, new ItemStack[] {new ItemStack(Material.POTION,1), new ItemStack(Material.EMERALD, 1)}, new ItemStack[] {sj_Expansion_item.BAD_OMEN_POTION});
+                    return new MachineRecipe(20, new ItemStack[] {new ItemStack(Material.POTION,1), new SlimefunItemStack(sj_Expansion_item.VILLAGER_SOUL, 1)}, new ItemStack[] {sj_Expansion_item.BAD_OMEN_POTION});
                 }
             }
-            else if (input2.getType() == Material.POTION && input1.getType() == Material.EMERALD)
+            else if (input2.getType() == Material.POTION && isVillagerSoul(input1))
             {
                 PotionMeta potionMeta = (PotionMeta) input2.getItemMeta();
                 PotionData potionData = potionMeta.getBasePotionData();
@@ -130,7 +124,7 @@ public class Expansion_Brewing_Stand extends AContainer implements NotHopperable
                 {
                     menu.consumeItem(getInputSlots()[0],1);
                     menu.consumeItem(getInputSlots()[1],1);
-                    return new MachineRecipe(20, new ItemStack[] {new ItemStack(Material.POTION,1), new ItemStack(Material.EMERALD, 1)}, new ItemStack[] {sj_Expansion_item.BAD_OMEN_POTION});
+                    return new MachineRecipe(20, new ItemStack[] {new ItemStack(Material.POTION,1), new SlimefunItemStack(sj_Expansion_item.VILLAGER_SOUL, 1)}, new ItemStack[] {sj_Expansion_item.BAD_OMEN_POTION});
                 }
             }
 
@@ -234,5 +228,11 @@ public class Expansion_Brewing_Stand extends AContainer implements NotHopperable
     private boolean isPotion(@Nonnull Material mat)
     {
         return mat == Material.POTION || mat == Material.SPLASH_POTION || mat == Material.LINGERING_POTION;
+    }
+
+    public boolean isVillagerSoul(ItemStack item) 
+    {
+        SlimefunItem sfItem = SlimefunItem.getByItem(item);
+        return sfItem != null && sfItem.getId().equals("VILLAGER_SOUL");
     }
 }

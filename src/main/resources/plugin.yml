@@ -1,25 +1,21 @@
-## CHANGE this to the name of your plugin.
 name: sj_Expansion
 
-## CHANGE this to your username.
 author: czssj_
 
-## CHANGE this to a meaninful but short description of your plugin.
 description: A Slimefun4-Addon with some memes and some interesting things
 
-## CHANGE this to the path of the class that extends JavaPlugin.
 main: me.czssj_.sj_expansion.sj_Expansion
 
-## You can change this to link to your website or repository. You can also remove this line if you want to.
 website: https://github.com/czszzh/sj_Expansion
 
 ## This value is automatically replaced by the version specified in your pom.xml file.
 ## Do not change this.
 version: ${project.version}
 
-## This is the minimum minecraft version required to run your plugin.
 api-version: 1.14
 
-## This is required and marks Slimefun as a plugin dependency.
 depend:
 - Slimefun
+- RykenSlimefunCustomizer
+- InfinityExpansion
+- FluffyMachines
