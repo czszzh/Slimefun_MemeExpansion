@@ -192,7 +192,7 @@ public final class sj_Expansion_setup
         }, 4).setCapacity(400).setEnergyConsumption(40).register(plugin);
 
         new Expansion_Repawn_Machine(Machines, sj_Expansion_item.EXPANSION_RESPAWN_MACHINE, 
-        RecipeType.NULL, new ItemStack[]{
+        RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
                 SlimefunItem.getById("MACHINE_CORE").getItem(),SlimefunItems.ADVANCED_CIRCUIT_BOARD,SlimefunItem.getById("MACHINE_CORE").getItem(),
                 sj_Expansion_item.EXPANSION_CORE,new ItemStack(Material.RESPAWN_ANCHOR),sj_Expansion_item.EXPANSION_CORE,
                 SlimefunItem.getById("MACHINE_CORE").getItem(),sj_Expansion_item.EXPANSION_CORE,SlimefunItem.getById("MACHINE_CORE").getItem()
