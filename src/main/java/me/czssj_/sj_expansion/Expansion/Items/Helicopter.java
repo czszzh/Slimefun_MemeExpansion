@@ -7,6 +7,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
+import me.czssj_.sj_expansion.sj_Expansion;
 import me.czssj_.sj_expansion.setup.sj_Expansion_item;
 
 import org.bukkit.Bukkit;
@@ -32,7 +33,6 @@ public class Helicopter extends SlimefunItem implements NotPlaceable
     @Override
     public void preRegister()
     {
-        addItemHandler((ItemUseHandler) PlayerRightClickEvent::cancel);
         ItemUseHandler itemUseHandler = this::itemRightClick;
         addItemHandler(itemUseHandler);
     }
@@ -50,11 +50,15 @@ public class Helicopter extends SlimefunItem implements NotPlaceable
                     event.getPlayer().removePotionEffect(PotionEffectType.LEVITATION);
                     Vector velocity = event.getPlayer().getVelocity();
                     velocity.setY(-1000);
-                    event.getPlayer().setLastDamageCause(new EntityDamageEvent(event.getPlayer(), EntityDamageEvent.DamageCause.ENTITY_EXPLOSION, 1000));
-                    event.getPlayer().setHealth(0);
-                    event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 1.0f, 1.0f);
-                    Bukkit.broadcastMessage(event.getPlayer().getName() + " 坠机身亡");
-                    event.getPlayer().getInventory().setHelmet(sj_Expansion_item.MAMBA_SPIRIT);
+                    Bukkit.getScheduler().runTaskLater(sj_Expansion.getInstance(), () -> {
+                        event.getPlayer().setLastDamageCause(new EntityDamageEvent(event.getPlayer(), EntityDamageEvent.DamageCause.ENTITY_EXPLOSION, 1000));
+                        event.getPlayer().setHealth(0);
+                        event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 1.0f, 1.0f);
+                        Bukkit.broadcastMessage(event.getPlayer().getName() + " 坠机身亡");
+                        event.getPlayer().getInventory().setHelmet(sj_Expansion_item.MAMBA_SPIRIT);
+                        return ;
+                    }, 20L);
+                    
                 }
                 else
                 {

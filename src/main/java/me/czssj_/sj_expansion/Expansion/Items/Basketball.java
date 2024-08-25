@@ -20,11 +20,16 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 public class Basketball extends SlimefunItem implements NotPlaceable, Listener
 {
     private Random random = new Random();
+    private Map<UUID, Long> lastShotTime = new HashMap<>();
+    private static final long COOLDOWN_MILLIS = 500;
 
     public Basketball(SubItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe)
     {
@@ -34,7 +39,6 @@ public class Basketball extends SlimefunItem implements NotPlaceable, Listener
     @Override
     public void preRegister() 
     {
-        addItemHandler((ItemUseHandler) PlayerRightClickEvent::cancel);
         ItemUseHandler itemUseHandler = this::itemRightClick;
         addItemHandler(itemUseHandler);
         JavaPlugin plugin = JavaPlugin.getProvidingPlugin(Basketball.class);
@@ -44,6 +48,13 @@ public class Basketball extends SlimefunItem implements NotPlaceable, Listener
     private void itemRightClick(PlayerRightClickEvent event)
     {
         Player p = event.getPlayer();
+        long currentTime = System.currentTimeMillis();
+        if (lastShotTime.containsKey(p.getUniqueId()) && currentTime - lastShotTime.get(p.getUniqueId()) < COOLDOWN_MILLIS) 
+        {
+            event.cancel();
+            return;
+        }
+        lastShotTime.put(p.getUniqueId(), currentTime);
         p.launchProjectile(Snowball.class);
         p.playSound(p.getLocation(), Sound.ENTITY_EGG_THROW, SoundCategory.MASTER, 1.0f, 1.0f);
         event.cancel();
@@ -54,10 +65,11 @@ public class Basketball extends SlimefunItem implements NotPlaceable, Listener
     {
         if (event.getEntity() instanceof Snowball) 
         {
-            if (event.getHitEntity() instanceof LivingEntity && !(event.getHitEntity() instanceof Player)) {
+            if (event.getHitEntity() instanceof LivingEntity && !(event.getHitEntity() instanceof Player))
+            {
                 LivingEntity hitEntity = (LivingEntity) event.getHitEntity();
-                hitEntity.damage(0.25);
-                if (random.nextDouble() < 0.025)
+                hitEntity.damage(2.5);
+                if (random.nextDouble() < 0.075)
                 {
                     hitEntity.getWorld().spawnEntity(hitEntity.getLocation(), EntityType.CHICKEN);
                     hitEntity.remove();

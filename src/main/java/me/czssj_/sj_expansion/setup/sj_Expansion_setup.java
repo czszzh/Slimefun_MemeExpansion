@@ -5,6 +5,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.items.groups.NestedItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.groups.SubItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 
@@ -20,6 +21,7 @@ import me.czssj_.sj_expansion.Expansion.Generators.Expansion_Iron_Generator;
 import me.czssj_.sj_expansion.Expansion.Generators.Expansion_Magma_Block_Machine;
 import me.czssj_.sj_expansion.Expansion.Items.Basketball;
 import me.czssj_.sj_expansion.Expansion.Items.Helicopter;
+import me.czssj_.sj_expansion.Expansion.Items.RELX;
 import me.czssj_.sj_expansion.Expansion.Items.Villager_Soul;
 
 public final class sj_Expansion_setup
@@ -94,6 +96,13 @@ public final class sj_Expansion_setup
                 sj_Expansion_item.AWKWARD_POTION,null,sj_Expansion_item.VILLAGER_SOUL,
                 null,null,null
         }).register(plugin);
+
+        new RELX(Items, sj_Expansion_item.RELX_V,
+        RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+                SlimefunItems.DURALUMIN_INGOT,SlimefunItems.HEATING_COIL,SlimefunItems.DURALUMIN_INGOT,
+                SlimefunItems.DURALUMIN_INGOT,SlimefunItems.BASIC_CIRCUIT_BOARD,SlimefunItems.DURALUMIN_INGOT,
+                SlimefunItems.DURALUMIN_INGOT,SlimefunItems.BATTERY,SlimefunItems.DURALUMIN_INGOT
+        }, 100).register(plugin);
 
         //materials
         new SlimefunItem(Materials, sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,

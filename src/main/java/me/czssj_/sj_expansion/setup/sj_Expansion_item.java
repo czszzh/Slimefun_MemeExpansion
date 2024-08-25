@@ -2,6 +2,7 @@ package me.czssj_.sj_expansion.setup;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -150,9 +151,9 @@ public class sj_Expansion_item
             "",
             "§4终极 机器",
             "§dE§9X§5P§1A§cN§8D§4E§3D",
-            "§8⇨ §3速度: 6x",
+            LoreBuilder.speed(6),
             "§8⇨ §e⚡§7 400 J 可存储",
-            "§8⇨ §e⚡§7 80 J/s"
+            LoreBuilder.powerPerSecond(80)
     );
 
     public static final SlimefunItemStack EXPANSION_STONE_CONVERT_MACHINE = new SlimefunItemStack(
@@ -164,9 +165,9 @@ public class sj_Expansion_item
             "§3各种其他类型的石头",
             "§0怎么做到的,有点神奇了",
             "§a基础 机器",
-            "§8⇨ §3速度: 1x",
+            LoreBuilder.speed(1),
             "§8⇨ §e⚡§7 100 J 可存储",
-            "§8⇨ §e⚡§7 20 J/s"
+            LoreBuilder.powerPerSecond(20)
     );
 
     public static final SlimefunItemStack EXPANSION_STONE_CONVERT_MACHINE_2 = new SlimefunItemStack(
@@ -178,9 +179,9 @@ public class sj_Expansion_item
             "§3各种其他类型的石头",
             "§0怎么做到的,有点神奇了",
             "§6高级 机器",
-            "§8⇨ §3速度: 4x",
+            LoreBuilder.speed(4),
             "§8⇨ §e⚡§7 400 J 可存储",
-            "§8⇨ §e⚡§7 80 J/s"
+            LoreBuilder.powerPerSecond(80)
     );
 
     public static final SlimefunItemStack EXPANSION_RESPAWN_MACHINE = new SlimefunItemStack(
@@ -191,7 +192,7 @@ public class sj_Expansion_item
             "§l孩子们,我回来了",
             "§0用于获取头颅(?",
             "§a§k1§k1§r §a机器",
-            "§8⇨ §e⚡§7 1919 J/s"
+            LoreBuilder.powerPerSecond(1919)
     );
 
     //generators
@@ -205,7 +206,7 @@ public class sj_Expansion_item
             "",
             "§a发电机",
             "§8⇨ §e⚡§7 114 J 可存储",
-            "§8⇨ §e⚡§7 24 J/s"
+            LoreBuilder.powerPerSecond(24)
     );
 
     public static final SlimefunItemStack EXPANSION_MAGMA_BLOCK_MACHINE = new SlimefunItemStack(
@@ -219,7 +220,7 @@ public class sj_Expansion_item
             "§6发电机",
             "§dE§9X§5P§1A§cN§8D§4E§3D§f",
             "§8⇨ §e⚡§7 400 J 可存储",
-            "§8⇨ §e⚡§7 40 J/s"
+            LoreBuilder.powerPerSecond(40)
     );
 
     //items
@@ -266,8 +267,19 @@ public class sj_Expansion_item
         "§8故人的身影......",
         "§a§l右键 §r§f投掷",
         "",
-        "§r每次造成 §f0.1坤 §r的伤害",
-        "§r有 §f百分之一坤 §r的概率将命中的生物变成鸡",
+        "§r每次造成 §f1坤 §r的伤害",
+        "§r有 §f3坤% §r的概率将命中的生物变成鸡",
         ""
+    );
+
+    public static final SlimefunItemStack RELX_V = new SlimefunItemStack(
+        "RELX_V",
+        Material.DRIED_KELP,
+        "§f§l悦刻五代",
+        "",
+        "“电子烟，我就爱锐刻”",
+        "                 —— 理塘丁真",
+        "",
+        LoreBuilder.powerCharged(0, 100)
     );
 }
