@@ -21,6 +21,7 @@ import me.czssj_.sj_expansion.Expansion.Generators.Expansion_Iron_Generator;
 import me.czssj_.sj_expansion.Expansion.Generators.Expansion_Magma_Block_Machine;
 import me.czssj_.sj_expansion.Expansion.Items.Basketball;
 import me.czssj_.sj_expansion.Expansion.Items.Helicopter;
+import me.czssj_.sj_expansion.Expansion.Items.NotPlaceableItem;
 import me.czssj_.sj_expansion.Expansion.Items.RELX;
 import me.czssj_.sj_expansion.Expansion.Items.Villager_Soul;
 
@@ -112,11 +113,18 @@ public final class sj_Expansion_setup
         }, 100).register(plugin);
 
         //materials
-        new SlimefunItem(Materials, sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,
+        new NotPlaceableItem(Materials, sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,
         RecipeType.COMPRESSOR, new ItemStack[]{
                 new SlimefunItemStack(SlimefunItems.MAGIC_LUMP_3,16),null,null,
                 null,null,null,
                 null,null,null
+        }).register(plugin);
+
+        new NotPlaceableItem(Materials, sj_Expansion_item.CONCENTRATED_ICE, 
+        RecipeType.COMPRESSOR, new ItemStack[]{
+                new ItemStack(Material.ICE, 64),new ItemStack(Material.ICE, 64),new ItemStack(Material.ICE, 64),
+                new ItemStack(Material.ICE, 64),new ItemStack(Material.ICE, 64),new ItemStack(Material.ICE, 64),
+                new ItemStack(Material.ICE, 64),new ItemStack(Material.ICE, 64),null
         }).register(plugin);
 
         new Villager_Soul(Materials, sj_Expansion_item.VILLAGER_SOUL,
@@ -126,28 +134,28 @@ public final class sj_Expansion_setup
                 null,null,null
         }).register(plugin);
 
-        new SlimefunItem(Materials, sj_Expansion_item.HELICOPTER_ENGINE,
+        new NotPlaceableItem(Materials, sj_Expansion_item.HELICOPTER_ENGINE,
         RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
                 SlimefunItems.REINFORCED_ALLOY_INGOT,SlimefunItems.REINFORCED_ALLOY_INGOT,SlimefunItems.REINFORCED_ALLOY_INGOT,
                 new ItemStack(Material.PISTON),SlimefunItem.getById("HELICOPTER_HAT").getItem(),new ItemStack(Material.PISTON),
                 SlimefunItem.getById("MACHINE_CORE").getItem(),SlimefunItems.STEEL_THRUSTER,SlimefunItem.getById("MACHINE_CORE").getItem()
         }).register(plugin);
 
-        new SlimefunItem(Materials, sj_Expansion_item.HELICOPTER_GLASS,
+        new NotPlaceableItem(Materials, sj_Expansion_item.HELICOPTER_GLASS,
         RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
                 new ItemStack(Material.GLASS_PANE),new ItemStack(Material.GLASS_PANE),new ItemStack(Material.GLASS_PANE),
                 new ItemStack(Material.GLASS_PANE),new ItemStack(Material.GLASS_PANE),new ItemStack(Material.GLASS_PANE),
                 SlimefunItems.REINFORCED_PLATE,SlimefunItems.WITHER_PROOF_GLASS,SlimefunItems.REINFORCED_PLATE
         }).register(plugin);
 
-        new SlimefunItem(Materials, sj_Expansion_item.HELICOPTER_PROPELLER,
+        new NotPlaceableItem(Materials, sj_Expansion_item.HELICOPTER_PROPELLER,
         RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
                 null,SlimefunItems.STEEL_THRUSTER,null,
                 SlimefunItems.STEEL_THRUSTER,SlimefunItems.ELECTRIC_MOTOR,SlimefunItems.STEEL_THRUSTER,
                 null,SlimefunItems.STEEL_THRUSTER,null
         }).register(plugin);
 
-        new SlimefunItem(Materials,sj_Expansion_item.IKUN_PRIME,
+        new NotPlaceableItem(Materials,sj_Expansion_item.IKUN_PRIME,
         RecipeType.COMPRESSOR, new ItemStack[]{
                 new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16),
                 new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16),
@@ -156,7 +164,7 @@ public final class sj_Expansion_setup
 
         if(SlimefunItem.getById("HAIMAN_MAGMA_BLOCK_MACHINE") == null)
         {
-                new SlimefunItem(Materials, sj_Expansion_item.MAGMA_BLOCK_MACHINECORE,
+                new NotPlaceableItem(Materials, sj_Expansion_item.MAGMA_BLOCK_MACHINECORE,
                 RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
                         SlimefunItems.DAMASCUS_STEEL_INGOT,SlimefunItems.ADVANCED_CIRCUIT_BOARD,SlimefunItems.DAMASCUS_STEEL_INGOT,
                         new ItemStack(Material.LAVA_BUCKET),SlimefunItems.ELECTRIC_MOTOR,new ItemStack(Material.LAVA_BUCKET),
@@ -164,7 +172,7 @@ public final class sj_Expansion_setup
                 }).register(plugin);
         }
 
-        new SlimefunItem(Materials, sj_Expansion_item.EXPANSION_CORE,
+        new NotPlaceableItem(Materials, sj_Expansion_item.EXPANSION_CORE,
         RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
                 SlimefunItems.LIGHTNING_RUNE,sj_Expansion_item.VILLAGER_SOUL,SlimefunItems.LIGHTNING_RUNE,
                 sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,new ItemStack(Material.BEACON),sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,
@@ -173,7 +181,7 @@ public final class sj_Expansion_setup
 
         //special items
         RecipeType RespawnMachine_RecipeType = new RecipeType(sj_Expansion_item.EXPANSION_RESPAWN_MACHINE, "EXPANSION_RESPAWN_MACHINE"); 
-        new SlimefunItem(SpecialItems, sj_Expansion_item.KOBE,
+        new NotPlaceableItem(SpecialItems, sj_Expansion_item.KOBE,
         RespawnMachine_RecipeType, new ItemStack[]{
                 null,null,null,
                 null,new CustomItemStack(Material.TOTEM_OF_UNDYING, "§a不死图腾", "§f24个"),null,
@@ -181,14 +189,14 @@ public final class sj_Expansion_setup
         }).register(plugin);
 
         RecipeType Helicopter_Crash = new RecipeType(new CustomItemStack(sj_Expansion_item.HELICOPTER, "§4坠机事件", " "), "HELICOPTER"); 
-        new SlimefunItem(SpecialItems, sj_Expansion_item.MAMBA_SPIRIT,
+        new NotPlaceableItem(SpecialItems, sj_Expansion_item.MAMBA_SPIRIT,
         Helicopter_Crash, new ItemStack[]{
                 null,null,null,
                 null,new CustomItemStack(sj_Expansion_item.KOBE, "§9Kobe", "§f佩戴在头上"),null,
                 null,null,null
         }).register(plugin);
 
-        new SlimefunItem(SpecialItems, sj_Expansion_item.ZOBAYAN,
+        new NotPlaceableItem(SpecialItems, sj_Expansion_item.ZOBAYAN,
         RespawnMachine_RecipeType, new ItemStack[]{
                 null,null,null,
                 null,new CustomItemStack(Material.TOTEM_OF_UNDYING, "§a不死图腾", "§f10个"),null,
@@ -253,10 +261,10 @@ public final class sj_Expansion_setup
 
         //weapons
         new Frost_Touch(Weapons, sj_Expansion_item.FROST_TOUCH,
-        RecipeType.NULL, new ItemStack[]{
-                null,null,null,
-                null,null,null,
-                null,null,null
+        RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+                sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,new ItemStack(Material.DIAMOND_SWORD),sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,
+                sj_Expansion_item.CONCENTRATED_ICE,new ItemStack(Material.DIAMOND_SWORD),sj_Expansion_item.CONCENTRATED_ICE,
+                null,sj_Expansion_item.EXPANSION_CORE,null
         }).register(plugin);
     }
 }

@@ -98,8 +98,8 @@ public class Frost_Touch extends SlimefunItem implements WeaponUseHandler, Liste
                 @Override
                 public void run() 
                 {
-                    Particle.DustOptions dustOptions = new Particle.DustOptions(Color.BLUE, 1);
-                    player.spawnParticle(Particle.REDSTONE, player.getLocation(), 250, 2, 0, 2, 0.1, dustOptions);
+                    Particle.DustOptions dustOptions = new Particle.DustOptions(Color.BLUE, 2);
+                    player.spawnParticle(Particle.REDSTONE, player.getLocation(), 300, 1.5, 0, 1.5, 0.1, dustOptions);
                     for (Entity entity : player.getNearbyEntities(2, 2, 2)) 
                     {
                         if (entity instanceof LivingEntity) 

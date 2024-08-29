@@ -48,10 +48,10 @@ public class RELX extends SlimefunItem implements NotPlaceable,Rechargeable
         {
             p.spawnParticle(Particle.CLOUD, p.getEyeLocation(), 100, 0.5, 0.5, 0.5, 0.2);
             p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_BREATH, SoundCategory.MASTER, 1.0f, 1.0f);
-            if(random.nextDouble() < 0.5)
+            if(random.nextDouble() < 0.3)
             {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 200,1));
-                p.sendTitle("", "§c你受到了二手烟的影响.....", 10, 70, 20);
+                p.sendTitle("", "§c你受到了二手烟的影响.....", 10, 50, 10);
             }
             List<Entity> nearbyEntities = p.getNearbyEntities(1.5, 1.5, 1.5);
             for (Entity entity : nearbyEntities) 
@@ -59,12 +59,12 @@ public class RELX extends SlimefunItem implements NotPlaceable,Rechargeable
                 if (entity instanceof LivingEntity) 
                 {
                     //p.sendMessage("Found LivingEntity: " + entity.getType().name());
-                    if(random.nextDouble() < 0.75)
+                    if(random.nextDouble() < 0.3)
                     {   
                         ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 200, 1));
                         if (entity instanceof Player)
                         {
-                            ((Player) entity).sendTitle("", "§c你受到了二手烟的影响.....", 10, 70, 20);
+                            ((Player) entity).sendTitle("", "§c你受到了二手烟的影响.....", 10, 50, 10);
                         }
                     }
                 }

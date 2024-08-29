@@ -56,7 +56,16 @@ public class sj_Expansion_item
     public static final SlimefunItemStack CONCENTRATED_MAGIC_LUMP = new SlimefunItemStack(
             "CONCENTRATED_MAGIC_LUMP",
             Material.GOLD_INGOT,
-            "§e浓缩魔法结晶"
+            "§e压缩魔法结晶"
+    );
+
+    public static final SlimefunItemStack CONCENTRATED_ICE = new SlimefunItemStack(
+            "CONCENTRATED_ICE",
+            Material.BLUE_ICE,
+            "§b压缩冰",
+            "",
+            "我超，冰！！！！",
+            ""
     );
 
     public static final SlimefunItemStack VILLAGER_SOUL = new SlimefunItemStack(
