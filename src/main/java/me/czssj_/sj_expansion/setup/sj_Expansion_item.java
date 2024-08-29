@@ -113,6 +113,15 @@ public class sj_Expansion_item
             ""
     );
 
+    public static final SlimefunItemStack MAGMA_BLOCK_MACHINECORE = new SlimefunItemStack(
+            "MAGMA_BLOCK_MACHINECORE",
+            Material.PAPER,
+            "岩浆块核心",
+            "",
+            "§3某个机器的合成替代物....",
+            ""
+     );
+
     //special items
     public static final SlimefunItemStack ZOBAYAN = new SlimefunItemStack(
             "ZOBAYAN",
@@ -281,5 +290,17 @@ public class sj_Expansion_item
         "                 —— 理塘丁真",
         "",
         LoreBuilder.powerCharged(0, 100)
+    );
+
+    //weapons
+    public static final SlimefunItemStack FROST_TOUCH = new SlimefunItemStack(
+        "FROST_TOUCH",
+        Material.DIAMOND_SWORD,
+        "§b§l寒霜之触",
+        "",
+        "§b冰封一切!",
+        "",
+        "§a对周围生物每秒造成1点的伤害",
+        "§a概率冰冻对方"
     );
 }

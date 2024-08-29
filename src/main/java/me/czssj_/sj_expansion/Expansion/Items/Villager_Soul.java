@@ -2,12 +2,12 @@ package me.czssj_.sj_expansion.Expansion.Items;
 
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
@@ -16,6 +16,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.groups.SubItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
+import me.czssj_.sj_expansion.sj_Expansion;
 import me.czssj_.sj_expansion.setup.sj_Expansion_item;
 
 public class Villager_Soul extends SlimefunItem implements NotPlaceable, Listener
@@ -27,10 +28,10 @@ public class Villager_Soul extends SlimefunItem implements NotPlaceable, Listene
         super(itemGroup, item, recipeType, recipe);
     }
 
+    @Override
     public void preRegister()
     {
-        JavaPlugin plugin = JavaPlugin.getProvidingPlugin(Villager_Soul.class);
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        Bukkit.getPluginManager().registerEvents(this, sj_Expansion.getInstance());
         addItemHandler((ItemUseHandler) PlayerRightClickEvent::cancel);
     }
 

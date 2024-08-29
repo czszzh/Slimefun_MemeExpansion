@@ -7,7 +7,9 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
+import me.czssj_.sj_expansion.sj_Expansion;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.EntityType;
@@ -18,7 +20,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,8 +42,7 @@ public class Basketball extends SlimefunItem implements NotPlaceable, Listener
     {
         ItemUseHandler itemUseHandler = this::itemRightClick;
         addItemHandler(itemUseHandler);
-        JavaPlugin plugin = JavaPlugin.getProvidingPlugin(Basketball.class);
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        Bukkit.getPluginManager().registerEvents(this, sj_Expansion.getInstance());
     }
 
     private void itemRightClick(PlayerRightClickEvent event)

@@ -5,7 +5,6 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.items.groups.NestedItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.groups.SubItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 
@@ -16,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import me.czssj_.sj_expansion.Expansion.Machines.Expansion_Brewing_Stand;
 import me.czssj_.sj_expansion.Expansion.Machines.Expansion_Repawn_Machine;
 import me.czssj_.sj_expansion.Expansion.Machines.Expansion_Stone_Convert_Machine;
+import me.czssj_.sj_expansion.Expansion.Weapon.Frost_Touch;
 import me.czssj_.sj_expansion.sj_Expansion;
 import me.czssj_.sj_expansion.Expansion.Generators.Expansion_Iron_Generator;
 import me.czssj_.sj_expansion.Expansion.Generators.Expansion_Magma_Block_Machine;
@@ -61,12 +61,19 @@ public final class sj_Expansion_setup
             new CustomItemStack(Material.STICK, "&e拓展 &f- &9物品", "", "")
     );
 
+    private static final SubItemGroup Weapons = new SubItemGroup(
+            new NamespacedKey(sj_Expansion.getInstance(), "sj_Expansion_Weapons"),
+            Main,
+            new CustomItemStack(Material.DIAMOND_SWORD, "&e拓展 &f- &9武器", "", "")
+    );
+
     private static final SubItemGroup SpecialItems = new SubItemGroup(
             new NamespacedKey(sj_Expansion.getInstance(), "sj_Expansion_SpecialItems"),
             Main,
             new CustomItemStack(Material.CREEPER_HEAD, "&e拓展 &f- &9特殊物品", "&3memes", "")
     );
 
+    @SuppressWarnings("null")
     public static void setup(sj_Expansion plugin)
     {
         //info
@@ -147,6 +154,16 @@ public final class sj_Expansion_setup
                 new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16)
         }).register(plugin);
 
+        if(SlimefunItem.getById("HAIMAN_MAGMA_BLOCK_MACHINE") == null)
+        {
+                new SlimefunItem(Materials, sj_Expansion_item.MAGMA_BLOCK_MACHINECORE,
+                RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+                        SlimefunItems.DAMASCUS_STEEL_INGOT,SlimefunItems.ADVANCED_CIRCUIT_BOARD,SlimefunItems.DAMASCUS_STEEL_INGOT,
+                        new ItemStack(Material.LAVA_BUCKET),SlimefunItems.ELECTRIC_MOTOR,new ItemStack(Material.LAVA_BUCKET),
+                        SlimefunItems.ALUMINUM_BRONZE_INGOT,SlimefunItems.ELECTRIC_MOTOR,SlimefunItems.ALUMINUM_BRONZE_INGOT
+                }).register(plugin);
+        }
+
         new SlimefunItem(Materials, sj_Expansion_item.EXPANSION_CORE,
         RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
                 SlimefunItems.LIGHTNING_RUNE,sj_Expansion_item.VILLAGER_SOUL,SlimefunItems.LIGHTNING_RUNE,
@@ -215,11 +232,31 @@ public final class sj_Expansion_setup
                 new ItemStack(Material.IRON_PICKAXE),SlimefunItems.BASIC_CIRCUIT_BOARD,new ItemStack(Material.IRON_PICKAXE)
         }).register(plugin);
 
-        new Expansion_Magma_Block_Machine(Generators, sj_Expansion_item.EXPANSION_MAGMA_BLOCK_MACHINE,
-        RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
-                SlimefunItems.DAMASCUS_STEEL_INGOT,SlimefunItems.BIG_CAPACITOR,SlimefunItems.DAMASCUS_STEEL_INGOT,
-                new ItemStack(Material.LAVA_BUCKET),SlimefunItem.getById("HAIMAN_MAGMA_BLOCK_MACHINE").getItem(),new ItemStack(Material.LAVA_BUCKET),
-                SlimefunItems.REINFORCED_ALLOY_INGOT,sj_Expansion_item.EXPANSION_CORE,SlimefunItems.REINFORCED_ALLOY_INGOT
+        if(SlimefunItem.getById("HAIMAN_MAGMA_BLOCK_MACHINE") != null)
+        {
+                new Expansion_Magma_Block_Machine(Generators, sj_Expansion_item.EXPANSION_MAGMA_BLOCK_MACHINE,
+                RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+                        SlimefunItems.DAMASCUS_STEEL_INGOT,SlimefunItems.BIG_CAPACITOR,SlimefunItems.DAMASCUS_STEEL_INGOT,
+                        new ItemStack(Material.LAVA_BUCKET),SlimefunItem.getById("HAIMAN_MAGMA_BLOCK_MACHINE").getItem(),new ItemStack(Material.LAVA_BUCKET),
+                        SlimefunItems.REINFORCED_ALLOY_INGOT,sj_Expansion_item.EXPANSION_CORE,SlimefunItems.REINFORCED_ALLOY_INGOT
+                }).register(plugin);
+        }
+        else
+        {
+                new Expansion_Magma_Block_Machine(Generators, sj_Expansion_item.EXPANSION_MAGMA_BLOCK_MACHINE,
+                RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+                        SlimefunItems.DAMASCUS_STEEL_INGOT,SlimefunItems.BIG_CAPACITOR,SlimefunItems.DAMASCUS_STEEL_INGOT,
+                        new ItemStack(Material.LAVA_BUCKET),sj_Expansion_item.MAGMA_BLOCK_MACHINECORE,new ItemStack(Material.LAVA_BUCKET),
+                        SlimefunItems.REINFORCED_ALLOY_INGOT,sj_Expansion_item.EXPANSION_CORE,SlimefunItems.REINFORCED_ALLOY_INGOT
+                }).register(plugin);
+        }
+
+        //weapons
+        new Frost_Touch(Weapons, sj_Expansion_item.FROST_TOUCH,
+        RecipeType.NULL, new ItemStack[]{
+                null,null,null,
+                null,null,null,
+                null,null,null
         }).register(plugin);
     }
 }
