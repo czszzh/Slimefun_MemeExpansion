@@ -4,6 +4,9 @@
 
 必要前置:
 - Slimefun
-- HaimanTech2-rsc
 - InfinityExpansion
 - FluffyMachines
+
+非必要前置:
+- HaimanTech-rsc
+
