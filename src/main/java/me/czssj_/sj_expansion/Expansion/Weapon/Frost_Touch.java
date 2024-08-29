@@ -48,6 +48,27 @@ public class Frost_Touch extends SlimefunItem implements WeaponUseHandler, Liste
         WeaponUseHandler weaponUseHandler = this::onHit;
         addItemHandler(weaponUseHandler);
         Bukkit.getPluginManager().registerEvents(this, sj_Expansion.getInstance());
+        new BukkitRunnable() 
+        {
+            @Override
+            public void run() 
+            {
+                for (Player player : Bukkit.getOnlinePlayers()) 
+                {
+                    ItemStack mainHandItem = player.getInventory().getItemInMainHand();
+                    SlimefunItem sfItem = SlimefunItem.getByItem(mainHandItem);
+
+                    if (sfItem != null && sfItem.getId().equals("FROST_TOUCH")) 
+                    {
+                        startDamageTask(player);
+                    } 
+                    else 
+                    {
+                        stopDamageTask(player);
+                    }
+                }
+            }
+        }.runTaskTimer(sj_Expansion.getInstance(), 0, 20);
     }
 
     @Override
@@ -71,6 +92,7 @@ public class Frost_Touch extends SlimefunItem implements WeaponUseHandler, Liste
         }
     }
 
+    /* 
     @EventHandler
     public void onPlayerItemHeld(PlayerItemHeldEvent event)
     {
@@ -87,7 +109,8 @@ public class Frost_Touch extends SlimefunItem implements WeaponUseHandler, Liste
             stopDamageTask(player);
         }
     }
-
+    */
+    
     private void startDamageTask(Player player) 
     {
         UUID playerId = player.getUniqueId();
@@ -99,7 +122,7 @@ public class Frost_Touch extends SlimefunItem implements WeaponUseHandler, Liste
                 public void run() 
                 {
                     Particle.DustOptions dustOptions = new Particle.DustOptions(Color.BLUE, 2);
-                    player.spawnParticle(Particle.REDSTONE, player.getLocation(), 300, 1.5, 0, 1.5, 0.1, dustOptions);
+                    player.spawnParticle(Particle.REDSTONE, player.getLocation(), 150, 1.2, 0, 1.2, 0.1, dustOptions);
                     for (Entity entity : player.getNearbyEntities(2, 2, 2)) 
                     {
                         if (entity instanceof LivingEntity) 
