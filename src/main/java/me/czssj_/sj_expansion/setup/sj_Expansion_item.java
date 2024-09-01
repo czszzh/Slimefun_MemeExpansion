@@ -4,6 +4,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 import me.czssj_.sj_expansion.Expansion.Items.MobItemBan;
+import me.czssj_.sj_expansion.Expansion.Items.MobItemLoot;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -305,13 +306,25 @@ public class sj_Expansion_item
     public static final SlimefunItemStack MOB_ITEM_BAN = new SlimefunItemStack(
         "MOB_ITEM_BAN",
         Material.STICK,
-        "§f缴械棍",
+        "§f缴械棒",
         "",
         "§3好像..有点用?",
         "",
         "§a攻击时清除对方手中物品",
         "&4对玩家无效",
         LoreBuilder.usesLeft(MobItemBan.MAX_USES)
+    );
+
+    public static final SlimefunItemStack MOB_ITEM_LOOT = new SlimefunItemStack(
+        "MOB_ITEM_LOOT",
+        Material.STICK,
+        "§f抢夺棒",
+        "",
+        "§6现在谁才是掠夺者?",
+        "",
+        "§a攻击时抢夺对方手中物品至自己背包",
+        "&4对玩家无效",
+        LoreBuilder.usesLeft(MobItemLoot.MAX_USES)
     );
 
     //weapons

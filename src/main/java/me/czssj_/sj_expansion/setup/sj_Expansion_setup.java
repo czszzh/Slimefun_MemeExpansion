@@ -10,7 +10,9 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
 import me.czssj_.sj_expansion.Expansion.Machines.Expansion_Brewing_Stand;
 import me.czssj_.sj_expansion.Expansion.Machines.Expansion_Repawn_Machine;
@@ -24,6 +26,7 @@ import me.czssj_.sj_expansion.Expansion.Generators.Expansion_Magma_Block_Machine
 import me.czssj_.sj_expansion.Expansion.Items.Basketball;
 import me.czssj_.sj_expansion.Expansion.Items.Helicopter;
 import me.czssj_.sj_expansion.Expansion.Items.MobItemBan;
+import me.czssj_.sj_expansion.Expansion.Items.MobItemLoot;
 import me.czssj_.sj_expansion.Expansion.Items.NotPlaceableItem;
 import me.czssj_.sj_expansion.Expansion.Items.RELX;
 import me.czssj_.sj_expansion.Expansion.Items.Villager_Soul;
@@ -116,10 +119,21 @@ public final class sj_Expansion_setup
         }, 100).register(plugin);
 
         new MobItemBan(Items, sj_Expansion_item.MOB_ITEM_BAN,
-        RecipeType.NULL, new ItemStack[]{
-                null,null,null,
-                null,null,null,
-                null,null,null
+        RecipeType.ANCIENT_ALTAR, new ItemStack[]{
+                sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,new ItemStack(Material.STICK),sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,
+                SlimefunItems.ENDER_RUNE,new ItemStack(Material.STICK),SlimefunItems.ENDER_RUNE,
+                sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,new ItemStack(Material.STICK),sj_Expansion_item.CONCENTRATED_MAGIC_LUMP
+        }).register(plugin);
+
+        ItemStack EnchantedBook_lootingIV = new ItemStack(Material.ENCHANTED_BOOK);
+        EnchantmentStorageMeta meta = (EnchantmentStorageMeta) EnchantedBook_lootingIV.getItemMeta();
+        meta.addStoredEnchant(Enchantment.LOOT_BONUS_MOBS, 4, true);
+        EnchantedBook_lootingIV.setItemMeta(meta);
+        new MobItemLoot(Items, sj_Expansion_item.MOB_ITEM_LOOT, 
+        RecipeType.MAGIC_WORKBENCH, new ItemStack[]{
+                null,sj_Expansion_item.MOB_ITEM_BAN,null,
+                EnchantedBook_lootingIV,sj_Expansion_item.EXPANSION_CORE,EnchantedBook_lootingIV,
+                null,sj_Expansion_item.MOB_ITEM_BAN,null
         }).register(plugin);
 
         //materials
