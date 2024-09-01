@@ -17,7 +17,6 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 
 public class Expansion_Stone_Convert_Machine extends AContainer implements NotHopperable
 {
-    private Random random = new Random();
     private int s;
 
     public Expansion_Stone_Convert_Machine(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, int speed)
@@ -68,14 +67,7 @@ public class Expansion_Stone_Convert_Machine extends AContainer implements NotHo
     {
         return 100;
     }
-    /* 
-    @Override
-    protected void registerDefaultRecipes() 
-    {
-        Material outputMaterial = stones[random.nextInt(stones.length)];
-        new MachineRecipe(4, new ItemStack[] {new ItemStack(Material.STONE,2)},new ItemStack[]{new ItemStack(outputMaterial)});
-    }
-    */
+
     @Override
     protected @Nullable MachineRecipe findNextRecipe(BlockMenu menu)
     {

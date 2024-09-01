@@ -1,2 +1,2 @@
 options:
-  auto-update: true
+  check-update: true

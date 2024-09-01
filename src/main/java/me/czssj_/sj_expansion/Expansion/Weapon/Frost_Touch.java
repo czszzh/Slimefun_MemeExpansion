@@ -16,10 +16,8 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -56,9 +54,11 @@ public class Frost_Touch extends SlimefunItem implements WeaponUseHandler, Liste
                 for (Player player : Bukkit.getOnlinePlayers()) 
                 {
                     ItemStack mainHandItem = player.getInventory().getItemInMainHand();
-                    SlimefunItem sfItem = SlimefunItem.getByItem(mainHandItem);
+                    ItemStack offHandItem = player.getInventory().getItemInOffHand();
+                    SlimefunItem sfItem1 = SlimefunItem.getByItem(mainHandItem);
+                    SlimefunItem sfItem2 = SlimefunItem.getByItem(offHandItem);
 
-                    if (sfItem != null && sfItem.getId().equals("FROST_TOUCH")) 
+                    if ((sfItem1 != null && sfItem1.getId().equals("FROST_TOUCH")) || (sfItem2 != null && sfItem2.getId().equals("FROST_TOUCH"))) 
                     {
                         startDamageTask(player);
                     } 
@@ -85,31 +85,13 @@ public class Frost_Touch extends SlimefunItem implements WeaponUseHandler, Liste
                 Material originalMaterial = targetBlock.getType();
                 targetBlock.setType(Material.POWDER_SNOW);
                 target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20*3, 10));
+                target.setFreezeTicks(20*3);
                 Bukkit.getScheduler().runTaskLater(sj_Expansion.getInstance(), () -> {
                     targetBlock.setType(originalMaterial);
                 }, 20*3);
             }
         }
     }
-
-    /* 
-    @EventHandler
-    public void onPlayerItemHeld(PlayerItemHeldEvent event)
-    {
-        Player player = event.getPlayer();
-        ItemStack mainHandItem = player.getInventory().getItem(event.getNewSlot());
-        SlimefunItem sfItem = SlimefunItem.getByItem(mainHandItem);
-
-        if (sfItem != null && sfItem.getId().equals("FROST_TOUCH")) 
-        {
-            startDamageTask(player);
-        } 
-        else 
-        {
-            stopDamageTask(player);
-        }
-    }
-    */
     
     private void startDamageTask(Player player) 
     {
@@ -127,7 +109,7 @@ public class Frost_Touch extends SlimefunItem implements WeaponUseHandler, Liste
                     {
                         if (entity instanceof LivingEntity) 
                         {
-                            ((LivingEntity) entity).damage(1);
+                            ((LivingEntity) entity).damage(1, player);
                         }
                     }
                 }

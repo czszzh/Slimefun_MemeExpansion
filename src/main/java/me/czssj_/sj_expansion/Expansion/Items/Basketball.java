@@ -12,9 +12,11 @@ import me.czssj_.sj_expansion.sj_Expansion;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
+import org.bukkit.entity.Egg;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -48,6 +50,7 @@ public class Basketball extends SlimefunItem implements NotPlaceable, Listener
     private void itemRightClick(PlayerRightClickEvent event)
     {
         Player p = event.getPlayer();
+        ItemStack helmet = p.getInventory().getHelmet();
         long currentTime = System.currentTimeMillis();
         if (lastShotTime.containsKey(p.getUniqueId()) && currentTime - lastShotTime.get(p.getUniqueId()) < COOLDOWN_MILLIS) 
         {
@@ -55,15 +58,36 @@ public class Basketball extends SlimefunItem implements NotPlaceable, Listener
             return;
         }
         lastShotTime.put(p.getUniqueId(), currentTime);
-        p.launchProjectile(Snowball.class);
+        if(helmet != null)
+        {
+            SlimefunItem sfItem = SlimefunItem.getByItem(helmet);
+            if (sfItem != null && sfItem.getId().equals("IKUN_PRIME"))
+            {
+                launchProjectile(p, Egg.class);
+            }
+            else
+            {
+                launchProjectile(p, Snowball.class);
+            }
+        }
+        else
+        {
+            launchProjectile(p, Snowball.class);
+        }
         p.playSound(p.getLocation(), Sound.ENTITY_EGG_THROW, SoundCategory.MASTER, 1.0f, 1.0f);
         event.cancel();
     }
 
-    @EventHandler
-    public void onSnowballHit(ProjectileHitEvent event) 
+    private void launchProjectile(Player player, Class<? extends Projectile> projectileClass) 
     {
-        if (event.getEntity() instanceof Snowball) 
+        Projectile projectile = player.launchProjectile(projectileClass);
+        projectile.setShooter(player);
+    }
+
+    @EventHandler
+    public void onBallHit(ProjectileHitEvent event) 
+    {
+        if (event.getEntity() instanceof Snowball || event.getEntity() instanceof Egg) 
         {
             if (event.getHitEntity() instanceof LivingEntity && !(event.getHitEntity() instanceof Player))
             {

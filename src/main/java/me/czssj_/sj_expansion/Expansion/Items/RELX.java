@@ -51,7 +51,6 @@ public class RELX extends SlimefunItem implements NotPlaceable,Rechargeable
             if(random.nextDouble() < 0.3)
             {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 200,1));
-                p.sendTitle("", "§c你受到了二手烟的影响.....", 10, 50, 10);
             }
             List<Entity> nearbyEntities = p.getNearbyEntities(1.5, 1.5, 1.5);
             for (Entity entity : nearbyEntities) 
@@ -62,10 +61,6 @@ public class RELX extends SlimefunItem implements NotPlaceable,Rechargeable
                     if(random.nextDouble() < 0.3)
                     {   
                         ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 200, 1));
-                        if (entity instanceof Player)
-                        {
-                            ((Player) entity).sendTitle("", "§c你受到了二手烟的影响.....", 10, 50, 10);
-                        }
                     }
                 }
             }

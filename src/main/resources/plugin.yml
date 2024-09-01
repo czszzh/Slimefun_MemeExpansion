@@ -8,8 +8,6 @@ main: me.czssj_.sj_expansion.sj_Expansion
 
 website: https://github.com/czszzh/sj_Expansion
 
-## This value is automatically replaced by the version specified in your pom.xml file.
-## Do not change this.
 version: ${project.version}
 
 api-version: 1.14

@@ -16,11 +16,14 @@ import me.czssj_.sj_expansion.Expansion.Machines.Expansion_Brewing_Stand;
 import me.czssj_.sj_expansion.Expansion.Machines.Expansion_Repawn_Machine;
 import me.czssj_.sj_expansion.Expansion.Machines.Expansion_Stone_Convert_Machine;
 import me.czssj_.sj_expansion.Expansion.Weapon.Frost_Touch;
+import me.czssj_.sj_expansion.Expansion.Weapon.Grenade;
+import me.czssj_.sj_expansion.Expansion.Weapon.One_Hit_Axe;
 import me.czssj_.sj_expansion.sj_Expansion;
 import me.czssj_.sj_expansion.Expansion.Generators.Expansion_Iron_Generator;
 import me.czssj_.sj_expansion.Expansion.Generators.Expansion_Magma_Block_Machine;
 import me.czssj_.sj_expansion.Expansion.Items.Basketball;
 import me.czssj_.sj_expansion.Expansion.Items.Helicopter;
+import me.czssj_.sj_expansion.Expansion.Items.MobItemBan;
 import me.czssj_.sj_expansion.Expansion.Items.NotPlaceableItem;
 import me.czssj_.sj_expansion.Expansion.Items.RELX;
 import me.czssj_.sj_expansion.Expansion.Items.Villager_Soul;
@@ -112,6 +115,13 @@ public final class sj_Expansion_setup
                 SlimefunItems.DURALUMIN_INGOT,SlimefunItems.BATTERY,SlimefunItems.DURALUMIN_INGOT
         }, 100).register(plugin);
 
+        new MobItemBan(Items, sj_Expansion_item.MOB_ITEM_BAN,
+        RecipeType.NULL, new ItemStack[]{
+                null,null,null,
+                null,null,null,
+                null,null,null
+        }).register(plugin);
+
         //materials
         new NotPlaceableItem(Materials, sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,
         RecipeType.COMPRESSOR, new ItemStack[]{
@@ -155,13 +165,6 @@ public final class sj_Expansion_setup
                 null,SlimefunItems.STEEL_THRUSTER,null
         }).register(plugin);
 
-        new NotPlaceableItem(Materials,sj_Expansion_item.IKUN_PRIME,
-        RecipeType.COMPRESSOR, new ItemStack[]{
-                new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16),
-                new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16),
-                new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16)
-        }).register(plugin);
-
         if(SlimefunItem.getById("HAIMAN_MAGMA_BLOCK_MACHINE") == null)
         {
                 new NotPlaceableItem(Materials, sj_Expansion_item.MAGMA_BLOCK_MACHINECORE,
@@ -201,6 +204,13 @@ public final class sj_Expansion_setup
                 null,null,null,
                 null,new CustomItemStack(Material.TOTEM_OF_UNDYING, "§a不死图腾", "§f10个"),null,
                 null,null,null
+        }).register(plugin);
+
+        new NotPlaceableItem(SpecialItems,sj_Expansion_item.IKUN_PRIME,
+        RecipeType.COMPRESSOR, new ItemStack[]{
+                new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16),
+                new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16),
+                new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16),new ItemStack(Material.EGG, 16)
         }).register(plugin);
 
         //machines
@@ -265,6 +275,20 @@ public final class sj_Expansion_setup
                 sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,new ItemStack(Material.DIAMOND_SWORD),sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,
                 sj_Expansion_item.CONCENTRATED_ICE,new ItemStack(Material.DIAMOND_SWORD),sj_Expansion_item.CONCENTRATED_ICE,
                 null,sj_Expansion_item.EXPANSION_CORE,null
+        }).register(plugin);
+
+        new One_Hit_Axe(Weapons, sj_Expansion_item.ONE_HIT_AXE, 
+        RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+                null,sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,SlimefunItems.REINFORCED_PLATE,
+                null,new ItemStack(Material.NETHERITE_AXE),SlimefunItems.REINFORCED_PLATE,
+                null,sj_Expansion_item.EXPANSION_CORE,null
+        }).register(plugin);
+
+        new Grenade(Weapons, sj_Expansion_item.GRENADE, 
+        RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+                SlimefunItems.DAMASCUS_STEEL_INGOT,new ItemStack(Material.FLINT_AND_STEEL),SlimefunItems.DAMASCUS_STEEL_INGOT,
+                SlimefunItems.DAMASCUS_STEEL_INGOT,new ItemStack(Material.TNT),SlimefunItems.DAMASCUS_STEEL_INGOT,
+                SlimefunItems.DAMASCUS_STEEL_INGOT,new ItemStack(Material.GUNPOWDER),SlimefunItems.DAMASCUS_STEEL_INGOT
         }).register(plugin);
     }
 }

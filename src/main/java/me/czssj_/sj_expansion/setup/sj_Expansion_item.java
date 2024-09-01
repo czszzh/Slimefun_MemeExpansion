@@ -3,6 +3,7 @@ package me.czssj_.sj_expansion.setup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
+import me.czssj_.sj_expansion.Expansion.Items.MobItemBan;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -301,6 +302,18 @@ public class sj_Expansion_item
         LoreBuilder.powerCharged(0, 100)
     );
 
+    public static final SlimefunItemStack MOB_ITEM_BAN = new SlimefunItemStack(
+        "MOB_ITEM_BAN",
+        Material.STICK,
+        "§f缴械棍",
+        "",
+        "§3好像..有点用?",
+        "",
+        "§a攻击时清除对方手中物品",
+        "&4对玩家无效",
+        LoreBuilder.usesLeft(MobItemBan.MAX_USES)
+    );
+
     //weapons
     public static final SlimefunItemStack FROST_TOUCH = new SlimefunItemStack(
         "FROST_TOUCH",
@@ -311,5 +324,23 @@ public class sj_Expansion_item
         "",
         "§a对周围生物每秒造成1点的伤害",
         "§a概率冰冻对方"
+    );
+
+    public static final SlimefunItemStack ONE_HIT_AXE = new SlimefunItemStack(
+        "ONE_HIT_AXE",
+        Material.GOLDEN_AXE,
+        "§a§l秒人斧",
+        "",
+        "§4一击必杀",
+        "§3只能使用一次"
+    );    
+
+    public static final SlimefunItemStack GRENADE = new SlimefunItemStack(
+        "GRENADE",
+        "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2U1NWM1YWJjZTdhNzkyNjRhNDg5MmQ2ODgwNmVhYWZlMzcwYTBlNGRkMjZmNTYxOTFmN2MxODhmMDFlZDcyNiJ9fX0=",
+        "§f手雷",
+        "",
+        "§a§l右键 §r§f投掷",
+        ""
     );
 }
