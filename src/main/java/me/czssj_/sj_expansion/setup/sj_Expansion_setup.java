@@ -100,7 +100,7 @@ public final class sj_Expansion_setup
         /*迅捷药水*/
         ItemStack swiftnessPotion = new ItemStack(Material.POTION);
         PotionMeta swiftnessPotionMeta = (PotionMeta) swiftnessPotion.getItemMeta();
-        swiftnessPotionMeta.addCustomEffect(new PotionEffect(PotionEffectType.SPEED, 3600, 0), true);
+        swiftnessPotionMeta.setBasePotionData(new PotionData(PotionType.SPEED));
         swiftnessPotion.setItemMeta(swiftnessPotionMeta);
         /*粗制的药水*/
         ItemStack awkwardPotion = new ItemStack(Material.POTION);
