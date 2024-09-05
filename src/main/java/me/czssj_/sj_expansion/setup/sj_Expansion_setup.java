@@ -6,6 +6,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.groups.NestedItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.groups.SubItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.implementation.items.armor.SlimefunArmorPiece;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 
 import org.bukkit.Material;
@@ -13,6 +14,11 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 
 import me.czssj_.sj_expansion.Expansion.Machines.Expansion_Brewing_Stand;
 import me.czssj_.sj_expansion.Expansion.Machines.Expansion_Repawn_Machine;
@@ -25,6 +31,7 @@ import me.czssj_.sj_expansion.Expansion.Generators.Expansion_Iron_Generator;
 import me.czssj_.sj_expansion.Expansion.Generators.Expansion_Magma_Block_Machine;
 import me.czssj_.sj_expansion.Expansion.Items.Basketball;
 import me.czssj_.sj_expansion.Expansion.Items.Helicopter;
+import me.czssj_.sj_expansion.Expansion.Items.HumanSaddle;
 import me.czssj_.sj_expansion.Expansion.Items.MobItemBan;
 import me.czssj_.sj_expansion.Expansion.Items.MobItemLoot;
 import me.czssj_.sj_expansion.Expansion.Items.NotPlaceableItem;
@@ -74,6 +81,12 @@ public final class sj_Expansion_setup
             new CustomItemStack(Material.DIAMOND_SWORD, "&e拓展 &f- &9武器", "", "")
     );
 
+    private static final SubItemGroup Armors = new SubItemGroup(
+            new NamespacedKey(sj_Expansion.getInstance(), "sj_Expansion_Armors"),
+            Main,
+            new CustomItemStack(Material.DIAMOND_CHESTPLATE, "&e拓展 &f- &9盔甲", "", "")
+    );
+
     private static final SubItemGroup SpecialItems = new SubItemGroup(
             new NamespacedKey(sj_Expansion.getInstance(), "sj_Expansion_SpecialItems"),
             Main,
@@ -83,6 +96,18 @@ public final class sj_Expansion_setup
     @SuppressWarnings("null")
     public static void setup(sj_Expansion plugin)
     {
+        //药水
+        /*迅捷药水*/
+        ItemStack swiftnessPotion = new ItemStack(Material.POTION);
+        PotionMeta swiftnessPotionMeta = (PotionMeta) swiftnessPotion.getItemMeta();
+        swiftnessPotionMeta.addCustomEffect(new PotionEffect(PotionEffectType.SPEED, 3600, 0), true);
+        swiftnessPotion.setItemMeta(swiftnessPotionMeta);
+        /*粗制的药水*/
+        ItemStack awkwardPotion = new ItemStack(Material.POTION);
+        PotionMeta awkwardPotionMeta = (PotionMeta) awkwardPotion.getItemMeta();
+        awkwardPotionMeta.setBasePotionData(new PotionData(PotionType.AWKWARD));
+        awkwardPotion.setItemMeta(awkwardPotionMeta);
+
         //info
         new SlimefunItem(Info, sj_Expansion_item.INFO, RecipeType.NULL, new ItemStack[]{}).register(plugin);
         new SlimefunItem(Info, sj_Expansion_item.AUTHOR, RecipeType.NULL, new ItemStack[]{}).register(plugin);
@@ -107,7 +132,7 @@ public final class sj_Expansion_setup
         new SlimefunItem(Items, sj_Expansion_item.BAD_OMEN_POTION,
         EX_BrewingStand_RecipeType, new ItemStack[]{
                 null,null,null,
-                sj_Expansion_item.AWKWARD_POTION,null,sj_Expansion_item.VILLAGER_SOUL,
+                awkwardPotion,null,sj_Expansion_item.VILLAGER_SOUL,
                 null,null,null
         }).register(plugin);
 
@@ -134,6 +159,13 @@ public final class sj_Expansion_setup
                 null,sj_Expansion_item.MOB_ITEM_BAN,null,
                 EnchantedBook_lootingIV,sj_Expansion_item.EXPANSION_CORE,EnchantedBook_lootingIV,
                 null,sj_Expansion_item.MOB_ITEM_BAN,null
+        }).register(plugin);
+
+        new HumanSaddle(Items, sj_Expansion_item.HUMANSADDLE, 
+        RecipeType.MAGIC_WORKBENCH, new ItemStack[]{
+                new ItemStack(Material.LEAD),new ItemStack(Material.LEAD),new ItemStack(Material.LEAD),
+                sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,new ItemStack(Material.SADDLE),sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,
+                null,sj_Expansion_item.EXPANSION_CORE,null
         }).register(plugin);
 
         //materials
@@ -304,5 +336,32 @@ public final class sj_Expansion_setup
                 SlimefunItems.DAMASCUS_STEEL_INGOT,new ItemStack(Material.TNT),SlimefunItems.DAMASCUS_STEEL_INGOT,
                 SlimefunItems.DAMASCUS_STEEL_INGOT,new ItemStack(Material.GUNPOWDER),SlimefunItems.DAMASCUS_STEEL_INGOT
         }).register(plugin);
+
+        //armors
+        /*
+        new SlimefunItem(Armors, sj_Expansion_item.BLUE_SUIT,
+        RecipeType.ARMOR_FORGE, new ItemStack[]{
+                new ItemStack(Material.BLUE_WOOL),null,new ItemStack(Material.BLUE_WOOL),
+                new ItemStack(Material.BLUE_WOOL),new ItemStack(Material.LEATHER_CHESTPLATE),new ItemStack(Material.BLUE_WOOL),
+                new ItemStack(Material.BLUE_WOOL),swiftnessPotion,new ItemStack(Material.BLUE_WOOL)
+        }).register(plugin);
+
+        new SlimefunItem(Armors, sj_Expansion_item.BLUE_PANTS,
+        RecipeType.ARMOR_FORGE, new ItemStack[]{
+                new ItemStack(Material.BLUE_WOOL),new ItemStack(Material.LEATHER_LEGGINGS),new ItemStack(Material.BLUE_WOOL),
+                new ItemStack(Material.BLUE_WOOL),swiftnessPotion,new ItemStack(Material.BLUE_WOOL),
+                new ItemStack(Material.BLUE_WOOL),null,new ItemStack(Material.BLUE_WOOL)
+        }).register(plugin);
+        */
+        new SlimefunArmorPiece(Armors, sj_Expansion_item.QIE_ER_XI,
+        RecipeType.ARMOR_FORGE, new ItemStack[]{
+                SlimefunItems.GOLD_24K,null,SlimefunItems.GOLD_24K,
+                SlimefunItems.GOLD_24K,null,SlimefunItems.GOLD_24K,
+                swiftnessPotion,null,swiftnessPotion
+        },
+        new PotionEffect[]{
+                new PotionEffect(PotionEffectType.SPEED, 300, 4)
+        }).register(plugin);
+        
     }
 }

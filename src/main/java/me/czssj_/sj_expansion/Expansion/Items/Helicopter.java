@@ -43,7 +43,7 @@ public class Helicopter extends SlimefunItem implements NotPlaceable
         if (helmet != null)
         {
             SlimefunItem sfItem = SlimefunItem.getByItem(helmet);
-            if (sfItem != null && sfItem.getId().equals("KOBE"))
+            if (sfItem != null && sfItem.getId().equals("EXPANSION_KOBE"))
             {
                 if (random.nextDouble() < 0.05)
                 {

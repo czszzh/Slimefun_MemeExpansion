@@ -58,7 +58,7 @@ public class Frost_Touch extends SlimefunItem implements WeaponUseHandler, Liste
                     SlimefunItem sfItem1 = SlimefunItem.getByItem(mainHandItem);
                     SlimefunItem sfItem2 = SlimefunItem.getByItem(offHandItem);
 
-                    if ((sfItem1 != null && sfItem1.getId().equals("FROST_TOUCH")) || (sfItem2 != null && sfItem2.getId().equals("FROST_TOUCH"))) 
+                    if ((sfItem1 != null && sfItem1.getId().equals("EXPANSION_FROST_TOUCH")) || (sfItem2 != null && sfItem2.getId().equals("EXPANSION_FROST_TOUCH"))) 
                     {
                         startDamageTask(player);
                     } 
@@ -109,7 +109,7 @@ public class Frost_Touch extends SlimefunItem implements WeaponUseHandler, Liste
                     {
                         if (entity instanceof LivingEntity) 
                         {
-                            ((LivingEntity) entity).damage(1, player);
+                            ((LivingEntity) entity).damage(1);
                         }
                     }
                 }

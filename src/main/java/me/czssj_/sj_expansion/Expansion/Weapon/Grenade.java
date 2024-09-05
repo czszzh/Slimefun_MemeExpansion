@@ -60,7 +60,7 @@ public class Grenade extends SlimefunItem implements Listener
             Player player = (Player) thrownPotion.getShooter();
             ItemStack itemInHand = player.getInventory().getItemInMainHand();
             SlimefunItem sfItem = SlimefunItem.getByItem(itemInHand);
-            if (sfItem != null && sfItem.getId().equals("GRENADE")) 
+            if (sfItem != null && sfItem.getId().equals("EXPANSION_GRENADE")) 
             {
                 explode(thrownPotion.getLocation(), player);
             }

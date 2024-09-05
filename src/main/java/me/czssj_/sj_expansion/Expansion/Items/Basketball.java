@@ -6,10 +6,14 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
+import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.czssj_.sj_expansion.sj_Expansion;
+import me.czssj_.sj_expansion.setup.sj_Expansion_item;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Egg;
@@ -23,12 +27,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
-public class Basketball extends SlimefunItem implements NotPlaceable, Listener
+import javax.annotation.Nonnull;
+
+public class Basketball extends SlimefunItem implements NotPlaceable, Listener, RecipeDisplayItem
 {
     private Random random = new Random();
     private Map<UUID, Long> lastShotTime = new HashMap<>();
@@ -61,7 +69,7 @@ public class Basketball extends SlimefunItem implements NotPlaceable, Listener
         if(helmet != null)
         {
             SlimefunItem sfItem = SlimefunItem.getByItem(helmet);
-            if (sfItem != null && sfItem.getId().equals("IKUN_PRIME"))
+            if (sfItem != null && sfItem.getId().equals("EXPANSION_IKUN_PRIME"))
             {
                 launchProjectile(p, Egg.class);
             }
@@ -100,5 +108,15 @@ public class Basketball extends SlimefunItem implements NotPlaceable, Listener
                 }
             }
         }
+    }
+
+    @Override
+    @Nonnull
+    public List<ItemStack> getDisplayRecipes() 
+    {
+        List<ItemStack> displayRecipes = new ArrayList<>();
+        displayRecipes.add(new CustomItemStack(sj_Expansion_item.IKUN_PRIME, "§bikun精华", "§f在头顶佩戴"));
+        displayRecipes.add(new CustomItemStack(Material.EGG, "§f投掷鸡蛋"));
+        return displayRecipes;
     }
 }
