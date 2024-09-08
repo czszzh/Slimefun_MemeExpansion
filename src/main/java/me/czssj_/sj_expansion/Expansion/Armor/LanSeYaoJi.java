@@ -1,12 +1,8 @@
 package me.czssj_.sj_expansion.Expansion.Armor;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -16,18 +12,17 @@ import org.bukkit.potion.PotionEffectType;
 
 import io.github.thebusybiscuit.slimefun4.api.items.HashedArmorpiece;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.items.groups.SubItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
-public class LanSeYaoJi implements Runnable
+public class LanSeYaoJi extends SlimefunItem implements Runnable
 {
-    private final Set<PotionEffect> customEffects;
-
-    public LanSeYaoJi() 
+    public LanSeYaoJi(SubItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) 
     {
-        Set<PotionEffect> effects = new HashSet<>();
-        // 初始化套装效果
-        effects.add(new PotionEffect(PotionEffectType.SPEED, 300, 1));
-        customEffects = Collections.unmodifiableSet(effects);
+        super(itemGroup, item, recipeType, recipe);
     }
 
     @Override
@@ -35,57 +30,71 @@ public class LanSeYaoJi implements Runnable
     {
         for (Player p : Bukkit.getOnlinePlayers()) 
         {
-            if (!p.isValid() || p.isDead()) {
+            if (!p.isValid() || p.isDead()) 
+            {
                 continue;
             }
-
+            //p.sendMessage("player get");
             PlayerProfile.get(p, profile -> {
                 ItemStack[] armor = p.getInventory().getArmorContents();
-                checkForArmor(p, armor);
+                HashedArmorpiece[] cachedArmor = profile.getArmor();
+                handleArmor(p, armor, cachedArmor);
             });
         }
     }
 
     @ParametersAreNonnullByDefault
-    private void checkForArmor(Player p, ItemStack[] armor) 
+    private void handleArmor(Player p, ItemStack[] armor, HashedArmorpiece[] cachedArmor) 
     {
-        boolean hasBlueSuit = false;
-        boolean hasBluePants = false;
-        boolean hasQieErXi = false;
+        AtomicInteger count = new AtomicInteger(0);
 
-        for (ItemStack item : armor) 
+        for (int slot = 0; slot < 4; slot++) 
         {
-            if (item == null) continue;
+            ItemStack item = armor[slot];
+            HashedArmorpiece armorpiece = cachedArmor[slot];
 
-            SlimefunItem sfItem = SlimefunItem.getByItem(item);
-            if (sfItem == null) continue;
+            if (armorpiece.hasDiverged(item)) 
+            {
+                SlimefunItem sfItem = SlimefunItem.getByItem(item);
+                if (!(sfItem instanceof LanSeYaoJi)) 
+                {
+                    sfItem = null;
+                }
+                armorpiece.update(item, sfItem);
+            }
 
-            if (sfItem.getId().equals("EXPANSION_BLUE_SUIT")) 
+            if (item != null && armorpiece.getItem().isPresent()) 
             {
-                hasBlueSuit = true;
-            } 
-            else if (sfItem.getId().equals("EXPANSION_BLUE_PANTS")) 
-            {
-                hasBluePants = true;
-            } 
-            else if (sfItem.getId().equals("EXPANSION_QIE_ER_XI")) 
-            {
-                hasQieErXi = true;
+                Slimefun.runSync(() -> {
+                    SlimefunItem sfItem = SlimefunItem.getByItem(item);
+                    if (sfItem != null && (sfItem.getId().equals("EXPANSION_BLUE_SUIT") || sfItem.getId().equals("EXPANSION_BLUE_PANTS") || sfItem.getId().equals("EXPANSION_QIE_ER_XI"))) 
+                    {
+                        count.incrementAndGet();
+                        //p.sendMessage("检测数量:"+ count.get());
+                    }
+                });
+                
             }
         }
-
-        if (hasBlueSuit && hasBluePants && hasQieErXi) 
-        {
-            applyCustomEffects(p);
-        }
+        //p.sendMessage("总数量:"+ count.get());
+        applySpeedEffects(p, count.get());
     }
 
-    private void applyCustomEffects(@Nonnull Player p) 
+    private void applySpeedEffects(@Nonnull Player p, int count) 
     {
-        for (PotionEffect effect : customEffects) 
+        p.removePotionEffect(PotionEffectType.SPEED);
+
+        switch (count) 
         {
-            p.removePotionEffect(effect.getType());
-            p.addPotionEffect(effect);
+            case 1:
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 300, 1));
+                break;
+            case 2:
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 300, 2));
+                break;
+            case 3:
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 300, 4));
+                break;
         }
     }
 }
