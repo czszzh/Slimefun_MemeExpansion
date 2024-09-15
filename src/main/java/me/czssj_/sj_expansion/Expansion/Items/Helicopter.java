@@ -10,6 +10,8 @@ import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import me.czssj_.sj_expansion.sj_Expansion;
 import me.czssj_.sj_expansion.setup.sj_Expansion_item;
 
+import java.util.Random;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -18,8 +20,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
-
-import java.util.Random;
 
 public class Helicopter extends SlimefunItem implements NotPlaceable
 {

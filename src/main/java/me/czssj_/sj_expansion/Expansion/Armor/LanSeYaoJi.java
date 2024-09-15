@@ -1,100 +1,141 @@
 package me.czssj_.sj_expansion.Expansion.Armor;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import java.util.List;
+import java.util.ArrayList;
+
 import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import io.github.thebusybiscuit.slimefun4.api.items.HashedArmorpiece;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.items.groups.SubItemGroup;
-import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import me.czssj_.sj_expansion.sj_Expansion;
 
-public class LanSeYaoJi extends SlimefunItem implements Runnable
+public class LanSeYaoJi extends SlimefunItem implements Listener, RecipeDisplayItem
 {
+    private Map<UUID, BukkitRunnable> taskMap = new HashMap<>();
+
     public LanSeYaoJi(SubItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) 
     {
         super(itemGroup, item, recipeType, recipe);
     }
 
     @Override
-    public void run() 
+    public void preRegister()
     {
-        for (Player p : Bukkit.getOnlinePlayers()) 
+        Bukkit.getPluginManager().registerEvents(this, sj_Expansion.getInstance());
+        new BukkitRunnable() 
         {
-            if (!p.isValid() || p.isDead()) 
+            @Override
+            public void run() 
             {
-                continue;
-            }
-            //p.sendMessage("player get");
-            PlayerProfile.get(p, profile -> {
-                ItemStack[] armor = p.getInventory().getArmorContents();
-                HashedArmorpiece[] cachedArmor = profile.getArmor();
-                handleArmor(p, armor, cachedArmor);
-            });
-        }
-    }
-
-    @ParametersAreNonnullByDefault
-    private void handleArmor(Player p, ItemStack[] armor, HashedArmorpiece[] cachedArmor) 
-    {
-        AtomicInteger count = new AtomicInteger(0);
-
-        for (int slot = 0; slot < 4; slot++) 
-        {
-            ItemStack item = armor[slot];
-            HashedArmorpiece armorpiece = cachedArmor[slot];
-
-            if (armorpiece.hasDiverged(item)) 
-            {
-                SlimefunItem sfItem = SlimefunItem.getByItem(item);
-                if (!(sfItem instanceof LanSeYaoJi)) 
+                for (Player p : Bukkit.getOnlinePlayers()) 
                 {
-                    sfItem = null;
-                }
-                armorpiece.update(item, sfItem);
-            }
-
-            if (item != null && armorpiece.getItem().isPresent()) 
-            {
-                Slimefun.runSync(() -> {
-                    SlimefunItem sfItem = SlimefunItem.getByItem(item);
-                    if (sfItem != null && (sfItem.getId().equals("EXPANSION_BLUE_SUIT") || sfItem.getId().equals("EXPANSION_BLUE_PANTS") || sfItem.getId().equals("EXPANSION_QIE_ER_XI"))) 
+                    int num = 0;
+                    ItemStack[] armor = p.getInventory().getArmorContents();
+                    for (int i=0; i<4; i++)
                     {
-                        count.incrementAndGet();
-                        //p.sendMessage("检测数量:"+ count.get());
+                        if(armor[i] != null)
+                        {
+                            num = num + 1;
+                        }
                     }
-                });
-                
+                    if(num != 0)
+                    {
+                        applySpeedEffects(p);
+                    }
+                    else
+                    {
+                        stopTask(p);
+                        num = 0;
+                    }
+                }
             }
-        }
-        //p.sendMessage("总数量:"+ count.get());
-        applySpeedEffects(p, count.get());
+        }.runTaskTimer(sj_Expansion.getInstance(), 0, 100);
     }
 
-    private void applySpeedEffects(@Nonnull Player p, int count) 
+    private void applySpeedEffects(Player p) 
     {
-        p.removePotionEffect(PotionEffectType.SPEED);
-
-        switch (count) 
+        UUID playerId = p.getUniqueId();
+        if (!taskMap.containsKey(playerId))
         {
-            case 1:
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 300, 1));
-                break;
-            case 2:
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 300, 2));
-                break;
-            case 3:
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 300, 4));
-                break;
+            BukkitRunnable task = new BukkitRunnable()
+            {
+                @Override
+                public void run() 
+                {
+                    int num = 0;
+                    ItemStack boots = p.getInventory().getBoots();
+                    ItemStack chestplate = p.getInventory().getChestplate();
+                    ItemStack leggings = p.getInventory().getLeggings();
+                    SlimefunItem sfboots = SlimefunItem.getByItem(boots);
+                    SlimefunItem sfleggings = SlimefunItem.getByItem(leggings);
+                    SlimefunItem sfchestplate = SlimefunItem.getByItem(chestplate);
+
+                    if (sfboots != null && sfboots.getId().equals("EXPANSION_QIE_ER_XI")) 
+                    {
+                        num = num + 1;
+                    } 
+                    if (sfleggings != null && sfleggings.getId().equals("EXPANSION_BLUE_PANTS")) 
+                    {
+                        num = num + 1;
+                    }
+                    if (sfchestplate != null && sfchestplate.getId().equals("EXPANSION_BLUE_SUIT"))
+                    {
+                        num = num + 1;
+                    }
+                    
+                    p.removePotionEffect(PotionEffectType.SPEED);
+                    switch (num) 
+                    {
+                        case 1:
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 300, 1));
+                            break;
+                        case 2:
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 300, 2));
+                            break;
+                        case 3:
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 300, 4));
+                            break;
+                    }
+                }
+            };
+            task.runTaskTimer(sj_Expansion.getInstance(), 0, 100);
+            taskMap.put(playerId, task); 
+        } 
+    }
+
+    private void stopTask(Player p) 
+    {
+        UUID playerId = p.getUniqueId();
+        BukkitRunnable task = taskMap.remove(playerId);
+        if (task != null) 
+        {
+            task.cancel();
         }
+    }
+
+    @Override
+    @Nonnull
+    public List<ItemStack> getDisplayRecipes() 
+    {
+        List<ItemStack> displayRecipes = new ArrayList<>();
+        displayRecipes.add(new CustomItemStack(Material.PAPER, "§b蓝色妖姬套装"));
+        displayRecipes.add(new CustomItemStack(Material.EGG, "§f套装效果:","§3穿上一件时: §f获得速度II效果","§3穿上两件时: §f获得速度III效果","§3穿上三件时: §f获得速度V效果"));
+        return displayRecipes;
     }
 }

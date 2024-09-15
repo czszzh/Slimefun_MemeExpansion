@@ -327,6 +327,15 @@ public class sj_Expansion_item
         ""
     );
 
+    public static final SlimefunItemStack JINKELA = new SlimefunItemStack(
+        "EXPANSION_JINKELA",
+        "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDgxODgzNDVkYzZhMWJmMDg2NjMzODViOTlmMmJkMTU1MWE0OTI5MmE5M2I4NGUwYTk3YjkxN2I1NjViZjQxYSJ9fX0=",
+        "§6金坷垃",
+        "",
+        "§e§o肥料掺了金坷垃,一袋能顶两袋撒",
+        "§0不过好像不止两袋"
+    );
+
     //weapons
     public static final SlimefunItemStack FROST_TOUCH = new SlimefunItemStack(
         "EXPANSION_FROST_TOUCH",

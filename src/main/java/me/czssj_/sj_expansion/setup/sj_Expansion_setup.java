@@ -6,7 +6,6 @@ import io.github.thebusybiscuit.slimefun4.api.items.groups.NestedItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.groups.SubItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
-import io.github.thebusybiscuit.slimefun4.implementation.items.armor.SlimefunArmorPiece;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 
 import org.bukkit.Material;
@@ -16,8 +15,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
 import me.czssj_.sj_expansion.Expansion.Machines.Expansion_Brewing_Stand;
@@ -27,11 +24,13 @@ import me.czssj_.sj_expansion.Expansion.Weapon.Frost_Touch;
 import me.czssj_.sj_expansion.Expansion.Weapon.Grenade;
 import me.czssj_.sj_expansion.Expansion.Weapon.One_Hit_Axe;
 import me.czssj_.sj_expansion.sj_Expansion;
+import me.czssj_.sj_expansion.Expansion.Armor.LanSeYaoJi;
 import me.czssj_.sj_expansion.Expansion.Generators.Expansion_Iron_Generator;
 import me.czssj_.sj_expansion.Expansion.Generators.Expansion_Magma_Block_Machine;
 import me.czssj_.sj_expansion.Expansion.Items.Basketball;
 import me.czssj_.sj_expansion.Expansion.Items.Helicopter;
 import me.czssj_.sj_expansion.Expansion.Items.HumanSaddle;
+import me.czssj_.sj_expansion.Expansion.Items.JinKeLa;
 import me.czssj_.sj_expansion.Expansion.Items.MobItemBan;
 import me.czssj_.sj_expansion.Expansion.Items.MobItemLoot;
 import me.czssj_.sj_expansion.Expansion.Items.NotPlaceableItem;
@@ -166,6 +165,13 @@ public final class sj_Expansion_setup
                 new ItemStack(Material.LEAD),new ItemStack(Material.LEAD),new ItemStack(Material.LEAD),
                 sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,new ItemStack(Material.SADDLE),sj_Expansion_item.CONCENTRATED_MAGIC_LUMP,
                 null,sj_Expansion_item.EXPANSION_CORE,null
+        }).register(plugin);
+
+        new JinKeLa(Items, sj_Expansion_item.JINKELA,
+        RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+                new ItemStack(Material.BONE_MEAL),null,new ItemStack(Material.BONE_MEAL),
+                null,SlimefunItems.INFERNAL_BONEMEAL,null,
+                new ItemStack(Material.BONE_MEAL),null,new ItemStack(Material.BONE_MEAL)
         }).register(plugin);
 
         //materials
@@ -338,29 +344,25 @@ public final class sj_Expansion_setup
         }).register(plugin);
 
         //armors
-        /*
-        new SlimefunItem(Armors, sj_Expansion_item.BLUE_SUIT,
+        new LanSeYaoJi(Armors, sj_Expansion_item.BLUE_SUIT,
         RecipeType.ARMOR_FORGE, new ItemStack[]{
                 new ItemStack(Material.BLUE_WOOL),null,new ItemStack(Material.BLUE_WOOL),
                 new ItemStack(Material.BLUE_WOOL),new ItemStack(Material.LEATHER_CHESTPLATE),new ItemStack(Material.BLUE_WOOL),
                 new ItemStack(Material.BLUE_WOOL),swiftnessPotion,new ItemStack(Material.BLUE_WOOL)
         }).register(plugin);
 
-        new SlimefunItem(Armors, sj_Expansion_item.BLUE_PANTS,
+        new LanSeYaoJi(Armors, sj_Expansion_item.BLUE_PANTS,
         RecipeType.ARMOR_FORGE, new ItemStack[]{
                 new ItemStack(Material.BLUE_WOOL),new ItemStack(Material.LEATHER_LEGGINGS),new ItemStack(Material.BLUE_WOOL),
                 new ItemStack(Material.BLUE_WOOL),swiftnessPotion,new ItemStack(Material.BLUE_WOOL),
                 new ItemStack(Material.BLUE_WOOL),null,new ItemStack(Material.BLUE_WOOL)
         }).register(plugin);
-        */
-        new SlimefunArmorPiece(Armors, sj_Expansion_item.QIE_ER_XI,
+
+        new LanSeYaoJi(Armors, sj_Expansion_item.QIE_ER_XI,
         RecipeType.ARMOR_FORGE, new ItemStack[]{
                 SlimefunItems.GOLD_24K,null,SlimefunItems.GOLD_24K,
                 SlimefunItems.GOLD_24K,null,SlimefunItems.GOLD_24K,
                 swiftnessPotion,null,swiftnessPotion
-        },
-        new PotionEffect[]{
-                new PotionEffect(PotionEffectType.SPEED, 300, 4)
         }).register(plugin);
         
     }
