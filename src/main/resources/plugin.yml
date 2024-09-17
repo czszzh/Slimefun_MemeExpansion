@@ -19,3 +19,4 @@ depend:
 
 softdepend:
 - RykenSlimefunCustomizer
+- GuizhanLibPlugin
