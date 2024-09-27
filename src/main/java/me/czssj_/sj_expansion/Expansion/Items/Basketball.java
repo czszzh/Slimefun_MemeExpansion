@@ -95,16 +95,29 @@ public class Basketball extends SlimefunItem implements NotPlaceable, Listener, 
     @EventHandler
     public void onBallHit(ProjectileHitEvent event) 
     {
-        if (event.getEntity() instanceof Snowball || event.getEntity() instanceof Egg) 
+        if (event.getEntity().getShooter() instanceof Player)
         {
-            if (event.getHitEntity() instanceof LivingEntity && !(event.getHitEntity() instanceof Player))
+            Player p = (Player) event.getEntity().getShooter();
+            ItemStack basketball = p.getInventory().getItemInMainHand();
+            if(basketball != null)
             {
-                LivingEntity hitEntity = (LivingEntity) event.getHitEntity();
-                hitEntity.damage(2.5);
-                if (random.nextDouble() < 0.075)
+                SlimefunItem sfItem = SlimefunItem.getByItem(basketball);
+                if (!(sfItem != null && sfItem.getId().equals("EXPANSION_BASKETBALL")))
                 {
-                    hitEntity.getWorld().spawnEntity(hitEntity.getLocation(), EntityType.CHICKEN);
-                    hitEntity.remove();
+                    return ;
+                }
+            }
+            if (event.getEntity() instanceof Snowball || event.getEntity() instanceof Egg) 
+            {
+                if ((event.getHitEntity() instanceof LivingEntity) && !(event.getHitEntity() instanceof Player))
+                {
+                    LivingEntity hitEntity = (LivingEntity) event.getHitEntity();
+                    hitEntity.damage(2.5);
+                    if (random.nextDouble() < 0.075)
+                    {
+                        hitEntity.getWorld().spawnEntity(hitEntity.getLocation(), EntityType.CHICKEN);
+                        hitEntity.remove();
+                    }
                 }
             }
         }
