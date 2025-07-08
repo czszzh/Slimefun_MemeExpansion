@@ -1,0 +1,3 @@
+options:
+  #检测更新
+  auto-update: true
