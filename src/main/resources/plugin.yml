@@ -1,12 +1,11 @@
-name: sj_Expansion
+name: Meme_Expansion
 
 author: czssj_
 
 description: A Slimefun4-Addon with some memes and some interesting things
 
-main: me.czssj_.sj_expansion.sj_Expansion
-
-website: https://github.com/czszzh/sj_Expansion
+main: me.czssj_.meme_expansion.Meme_Expansion
+website: https://github.com/czszzh/Meme_Expansion
 
 version: ${project.version}
 
@@ -19,4 +18,4 @@ depend:
 
 softdepend:
 - RykenSlimefunCustomizer
-- GuizhanLibPlugin
+- Gastronomicon
