@@ -15,16 +15,18 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import io.github.mooy1.infinitylib.machines.AbstractMachineBlock;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import me.czssj_.meme_expansion.Expansion.Utils.AbstractAmulet;
 import me.czssj_.meme_expansion.setup.Meme_Expansion_item;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 
 //管它有多屎，你就说能不能跑吧
-public class Repawn_Machine extends AbstractMachineBlock
+public class Respawn_Machine extends AbstractMachineBlock
 {
     private static final int STATUS_SLOT = 40;
     private static final int[] INPUT_SLOT = {19};
@@ -48,7 +50,7 @@ public class Repawn_Machine extends AbstractMachineBlock
 
     private final Random random = new Random();
 
-    public Repawn_Machine(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe)
+    public Respawn_Machine(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe)
     {
         super(itemGroup, item, recipeType, recipe);
     }
@@ -209,12 +211,18 @@ public class Repawn_Machine extends AbstractMachineBlock
                 if (num >= 32) 
                 {
                     ItemStack upgradedAmulet = amulet.clone();
-                    ItemMeta meta = upgradedAmulet.getItemMeta();
-                    List<String> lore = meta.hasLore() ? new ArrayList<>(meta.getLore()) : new ArrayList<>();
-                    lore.removeIf(line -> line.startsWith("§3耐久:"));
-                    lore.add("§3耐久: 无限");
-                    meta.setLore(lore);
-                    upgradedAmulet.setItemMeta(meta);
+                    if (upgradedAmulet.getItemMeta() != null) 
+                    {
+                        SlimefunItem sfItem = SlimefunItem.getByItem(upgradedAmulet);
+                        if (sfItem instanceof AbstractAmulet abstractAmulet) abstractAmulet.setInfinite(true);
+                        
+                        ItemMeta meta = upgradedAmulet.getItemMeta();
+                        List<String> lore = meta.hasLore() ? new ArrayList<>(meta.getLore()) : new ArrayList<>();
+                        lore.removeIf(line -> line.startsWith("§3耐久:"));
+                        lore.add("§3耐久: 无限");
+                        meta.setLore(lore);
+                        upgradedAmulet.setItemMeta(meta);
+                    }
                     
                     menu.pushItem(upgradedAmulet, OUTPUT_SLOT[0]);
                     menu.consumeItem(DISPLAY_SLOT, 1);

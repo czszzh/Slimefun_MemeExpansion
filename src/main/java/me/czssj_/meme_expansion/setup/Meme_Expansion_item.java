@@ -37,6 +37,19 @@ public class Meme_Expansion_item
         "§f通过 §6下界之星反应堆 §f- §4EX §f获得"
     );
 
+    //arrow
+    public static final SlimefunItemStack MENU_ARROW_LEFT = new SlimefunItemStack(
+        "EXPANSION_MENUARROW_LEFT",
+        "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWQ3M2NmNjZkMzFiODNjZDhiODY0NGMxNTk1OGMxYjczYzhkOTczMjNiODAxMTcwYzFkODg2NGJiNmE4NDZkIn19fQ==",
+        "§f上一个选项"
+    );
+
+    public static final SlimefunItemStack MENU_ARROW_RIGHT = new SlimefunItemStack(
+        "EXPANSION_MENUARROW_RIGHT",
+        "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzg2MTg1YjFkNTE5YWRlNTg1ZjE4NGMzNGYzZjNlMjBiYjY0MWRlYjg3OWU4MTM3OGU0ZWFmMjA5Mjg3In19fQ==",
+        "§f下一个选项"
+    );
+
     //materials
     public static final SlimefunItemStack CONCENTRATED_MAGIC_LUMP = new SlimefunItemStack(
         "EXPANSION_CONCENTRATED_MAGIC_LUMP",
@@ -199,6 +212,16 @@ public class Meme_Expansion_item
         ""
     );
 
+    public static final SlimefunItemStack MATERIAL_FINAL = new SlimefunItemStack(
+        "EXPANSION_MATERIAL_FINAL",
+        Material.BUCKET,
+        "§a成就 §f- §b为什么会变成这样呢?",
+        "",
+        "§4§k1§r§x§5§f§3§7§f§f想§x§6§4§4§9§f§9必§x§6§8§5§b§f§3这§x§6§d§6§d§e§d就§x§7§1§7§f§e§8是§x§7§6§9§1§e§2终§x§7§a§a§3§d§c点§x§7§e§b§5§d§6了§x§8§3§c§7§d§0?§r§4§k1",
+        "§4§k1§r§x§3§7§f§f§9§f故§x§5§f§f§1§7§f事§x§8§7§e§3§5§f还§x§a§f§d§4§4§0未§x§d§7§c§6§2§0结§x§f§f§b§8§0§0束§r§4§k1",
+        ""
+    );
+
     //special items
     public static final SlimefunItemStack ZOBAYAN = new SlimefunItemStack(
         "EXPANSION_ZOBAYAN",
@@ -288,7 +311,7 @@ public class Meme_Expansion_item
         "§7获取一些头颅(?",
         "§7无限耐久护符升级器",
         "",
-        "§5SB §a机器",
+        "§4终极 机器",
         LoreBuilder.powerPerSecond(1919)
     );
     
@@ -367,6 +390,45 @@ public class Meme_Expansion_item
         "§8⇨ §e⚡§7 2000 J 可存储",
         LoreBuilder.powerPerSecond(1000)
     );
+
+    public static final SlimefunItemStack DIRECTIONAL_DUST_EXTRACTOR_1 = new SlimefunItemStack(
+        "EXPANSION_DIRECTIONAL_DUST_EXTRACTOR_1",
+        Material.GRINDSTONE,
+        "§e定向磨粉机",
+        "",
+        "§7将圆石变为特定矿粉",
+        "是魔法!他用了魔法！",
+        "",
+        "§6高级 机器",
+        LoreBuilder.speed(1),
+        "§8⇨ §e⚡§7 1000 J 可存储",
+        LoreBuilder.powerPerSecond(500)
+    );
+
+    public static final SlimefunItemStack DIRECTIONAL_DUST_EXTRACTOR_2 = new SlimefunItemStack(
+        "EXPANSION_DIRECTIONAL_DUST_EXTRACTOR_2",
+        Material.GRINDSTONE,
+        "§e无尽定向磨粉机",
+        "",
+        "§7将圆石变为特定矿粉",
+        "是魔法!他用了魔法！",
+        "",
+        "§4终极 机器",
+        LoreBuilder.speed(16),
+        "§8⇨ §e⚡§7 40000 J 可存储",
+        LoreBuilder.powerPerSecond(20000)
+    );
+
+    public static final SlimefunItemStack Meme_Generator = new SlimefunItemStack(
+        "EXPANSION_MEME_GENERATOR",
+        Material.EMERALD_BLOCK,
+        "§6迷因发生器",
+        "",
+        "",
+        ""
+    );
+
+
 
     //generators
     public static final SlimefunItemStack IRON_GENERATOR = new SlimefunItemStack(

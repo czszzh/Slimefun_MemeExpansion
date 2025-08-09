@@ -34,16 +34,18 @@ import me.czssj_.meme_expansion.Expansion.Items.HumanSaddle;
 import me.czssj_.meme_expansion.Expansion.Items.JinKeLa;
 import me.czssj_.meme_expansion.Expansion.Items.MobItemBan;
 import me.czssj_.meme_expansion.Expansion.Items.MobItemLoot;
-import me.czssj_.meme_expansion.Expansion.Items.NotPlaceableItem;
-import me.czssj_.meme_expansion.Expansion.Items.OrPVPBoss_Star;
 import me.czssj_.meme_expansion.Expansion.Items.RELX;
-import me.czssj_.meme_expansion.Expansion.Items.Villager_Soul;
 import me.czssj_.meme_expansion.Expansion.Machines.Auto_Harvester;
 import me.czssj_.meme_expansion.Expansion.Machines.Brewing_Stand;
+import me.czssj_.meme_expansion.Expansion.Machines.Directional_Dust_Extractor;
 import me.czssj_.meme_expansion.Expansion.Machines.Dis_Enchanting_Table;
 import me.czssj_.meme_expansion.Expansion.Machines.Raid_Simulator;
-import me.czssj_.meme_expansion.Expansion.Machines.Repawn_Machine;
+import me.czssj_.meme_expansion.Expansion.Machines.Respawn_Machine;
 import me.czssj_.meme_expansion.Expansion.Machines.Stone_Convert_Machine;
+import me.czssj_.meme_expansion.Expansion.Material.Material_Final;
+import me.czssj_.meme_expansion.Expansion.Material.OrPVPBoss_Star;
+import me.czssj_.meme_expansion.Expansion.Material.Villager_Soul;
+import me.czssj_.meme_expansion.Expansion.Utils.NotPlaceableItem;
 import me.czssj_.meme_expansion.Expansion.Weapon.Frost_Touch;
 import me.czssj_.meme_expansion.Expansion.Weapon.Grenade;
 import me.czssj_.meme_expansion.Expansion.Weapon.One_Hit_Axe;
@@ -246,6 +248,13 @@ public final class Meme_Expansion_setup
             null,new ItemStack(Material.NETHER_STAR),null,
             null,null,null
         }).register(plugin);
+
+        new Material_Final(Materials, Meme_Expansion_item.MATERIAL_FINAL,
+        RecipeType.NULL, new ItemStack[]{
+            null,null,null,
+            null,null,null,
+            null,null,null
+        }).register(plugin);
     }
 
     @SuppressWarnings("null")
@@ -390,11 +399,11 @@ public final class Meme_Expansion_setup
             SlimefunItems.BLISTERING_INGOT_3,SlimefunItems.HEATING_COIL,SlimefunItems.BLISTERING_INGOT_3
         }, 4).setCapacity(400).setEnergyConsumption(40).register(plugin);
 
-        new Repawn_Machine(Machines, Meme_Expansion_item.EXPANSION_RESPAWN_MACHINE, 
+        new Respawn_Machine(Machines, Meme_Expansion_item.EXPANSION_RESPAWN_MACHINE, 
         RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
-            SlimefunItem.getById("MACHINE_CORE").getItem(),SlimefunItems.ADVANCED_CIRCUIT_BOARD,SlimefunItem.getById("MACHINE_CORE").getItem(),
+            SlimefunItems.MAGICAL_GLASS,SlimefunItems.ADVANCED_CIRCUIT_BOARD,SlimefunItem.getById("COMPRESSED_COBBLESTONE_3").getItem(),
             Meme_Expansion_item.CONCENTRATED_MAGIC_LUMP,new ItemStack(Material.RESPAWN_ANCHOR),Meme_Expansion_item.CONCENTRATED_MAGIC_LUMP,
-            SlimefunItem.getById("MACHINE_CORE").getItem(),Meme_Expansion_item.EXPANSION_CORE,SlimefunItem.getById("MACHINE_CORE").getItem()
+            SlimefunItem.getById("MACHINE_CORE").getItem(),Meme_Expansion_item.EXPANSION_CORE,SlimefunItem.getById("MACHINE_CIRCUIT").getItem()
         }).energyPerTick(960).register(plugin);
 
         new Dis_Enchanting_Table(Machines, Meme_Expansion_item.DIS_ENCHANTING_TABLE,
@@ -438,6 +447,20 @@ public final class Meme_Expansion_setup
             SlimefunItems.ADVANCED_CIRCUIT_BOARD,Meme_Expansion_item.RAID_SIMULATOR_1,SlimefunItems.HEATING_COIL,
             SlimefunItem.getById("COMPRESSED_COBBLESTONE_2").getItem(),SlimefunItems.PROGRAMMABLE_ANDROID_3_BUTCHER,SlimefunItem.getById("COMPRESSED_COBBLESTONE_2").getItem()
         }, 2).energyCapacity(2000).energyPerTick(500).register(plugin);
+
+        new Directional_Dust_Extractor(Machines, Meme_Expansion_item.DIRECTIONAL_DUST_EXTRACTOR_1,
+        RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+            SlimefunItems.REINFORCED_PLATE,SlimefunItems.MAGICAL_GLASS,SlimefunItems.REINFORCED_PLATE,
+            null,SlimefunItem.getById("DUST_EXTRACTOR").getItem(),null,
+            SlimefunItems.MAGIC_LUMP_3,SlimefunItem.getById("MACHINE_CORE").getItem(),SlimefunItems.MAGIC_LUMP_3
+        }, 1).energyCapacity(1000).energyPerTick(250).register(plugin);
+
+        new Directional_Dust_Extractor(Machines, Meme_Expansion_item.DIRECTIONAL_DUST_EXTRACTOR_2,
+        RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+            null,Meme_Expansion_item.DIRECTIONAL_DUST_EXTRACTOR_1,null,
+            Meme_Expansion_item.CONCENTRATED_MAGIC_LUMP,SlimefunItem.getById("INFINITY_DUST_EXTRACTOR").getItem(),Meme_Expansion_item.CONCENTRATED_MAGIC_LUMP,
+            null,Meme_Expansion_item.EXPANSION_CORE,null
+        }, 2).energyCapacity(40000).energyPerTick(10000).register(plugin);
     }
 
     @SuppressWarnings("null")

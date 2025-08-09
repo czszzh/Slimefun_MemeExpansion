@@ -1,4 +1,4 @@
-package me.czssj_.meme_expansion.Expansion.Items;
+package me.czssj_.meme_expansion.Expansion.Material;
 
 import java.util.Collection;
 import java.util.Optional;

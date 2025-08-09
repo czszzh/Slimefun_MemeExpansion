@@ -1,4 +1,4 @@
-package me.czssj_.meme_expansion.Expansion.Items;
+package me.czssj_.meme_expansion.Expansion.Utils;
 
 import org.bukkit.inventory.ItemStack;
 
