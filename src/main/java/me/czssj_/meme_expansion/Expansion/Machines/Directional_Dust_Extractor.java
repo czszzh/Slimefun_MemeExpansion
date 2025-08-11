@@ -91,7 +91,7 @@ public class Directional_Dust_Extractor extends AbstractMachineBlock
     private void updateDisplay(BlockMenu menu, Block block) 
     {
         int current = Integer.parseInt(BlockStorage.getLocationInfo(block.getLocation(), CURRENT_SELECTION_KEY));
-        menu.replaceExistingItem(DISPLAY_SLOT, dusts.get(current));
+        menu.replaceExistingItem(DISPLAY_SLOT, new CustomItemStack(dusts.get(current), "§f当前输出:", dusts.get(current).getItemMeta().getDisplayName()));
     }
 
     @Override

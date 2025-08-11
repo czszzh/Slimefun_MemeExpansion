@@ -49,6 +49,7 @@ import me.czssj_.meme_expansion.Expansion.Utils.NotPlaceableItem;
 import me.czssj_.meme_expansion.Expansion.Weapon.Frost_Touch;
 import me.czssj_.meme_expansion.Expansion.Weapon.Grenade;
 import me.czssj_.meme_expansion.Expansion.Weapon.One_Hit_Axe;
+import me.czssj_.meme_expansion.Expansion.Weapon.ShenYIng_Stick;
 import me.czssj_.meme_expansion.Expansion.Weapon.StackEnchantment_Sword;
 import me.czssj_.meme_expansion.Expansion.Weapon.Sword_of_PVPBoss;
 import me.czssj_.meme_expansion.Meme_Expansion;
@@ -367,11 +368,11 @@ public final class Meme_Expansion_setup
             new ItemStack(Material.EXPERIENCE_BOTTLE),new ItemStack(Material.EXPERIENCE_BOTTLE),new ItemStack(Material.EXPERIENCE_BOTTLE)
         }).register(plugin);
 
-        new AmuletBackpack(9, Test, Meme_Expansion_item.AMULET_BACKPACK,
-        RecipeType.NULL, new ItemStack[]{
-            null,null,null,
-            null,null,null,
-            null,null,null
+        new AmuletBackpack(9, Items, Meme_Expansion_item.AMULET_BACKPACK,
+        RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+            new ItemStack(Material.BLAZE_POWDER),Meme_Expansion_item.EXPANSION_CORE,new ItemStack(Material.BLAZE_POWDER),
+            SlimefunItem.getById("MYTHRIL").getItem(),SlimefunItems.RADIANT_BACKPACK,SlimefunItem.getById("ADAMANTITE").getItem(),
+            SlimefunItems.REINFORCED_CLOTH,SlimefunItems.COMMON_TALISMAN,SlimefunItems.REINFORCED_CLOTH
         }).register(plugin);
     }
 
@@ -450,16 +451,16 @@ public final class Meme_Expansion_setup
 
         new Directional_Dust_Extractor(Machines, Meme_Expansion_item.DIRECTIONAL_DUST_EXTRACTOR_1,
         RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
-            SlimefunItems.REINFORCED_PLATE,SlimefunItems.MAGICAL_GLASS,SlimefunItems.REINFORCED_PLATE,
-            null,SlimefunItem.getById("DUST_EXTRACTOR").getItem(),null,
+            SlimefunItems.REINFORCED_PLATE,SlimefunItem.getById("MACHINE_CIRCUIT").getItem(),SlimefunItems.REINFORCED_PLATE,
+            SlimefunItems.MAGICAL_GLASS,SlimefunItem.getById("DUST_EXTRACTOR").getItem(),SlimefunItems.MAGICAL_GLASS,
             SlimefunItems.MAGIC_LUMP_3,SlimefunItem.getById("MACHINE_CORE").getItem(),SlimefunItems.MAGIC_LUMP_3
         }, 1).energyCapacity(1000).energyPerTick(250).register(plugin);
 
         new Directional_Dust_Extractor(Machines, Meme_Expansion_item.DIRECTIONAL_DUST_EXTRACTOR_2,
         RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
-            null,Meme_Expansion_item.DIRECTIONAL_DUST_EXTRACTOR_1,null,
+            SlimefunItem.getById("INFINITE_INGOT").getItem(),Meme_Expansion_item.DIRECTIONAL_DUST_EXTRACTOR_1,SlimefunItem.getById("INFINITE_INGOT").getItem(),
             Meme_Expansion_item.CONCENTRATED_MAGIC_LUMP,SlimefunItem.getById("INFINITY_DUST_EXTRACTOR").getItem(),Meme_Expansion_item.CONCENTRATED_MAGIC_LUMP,
-            null,Meme_Expansion_item.EXPANSION_CORE,null
+            SlimefunItem.getById("INFINITE_INGOT").getItem(),Meme_Expansion_item.EXPANSION_CORE,SlimefunItem.getById("INFINITE_INGOT").getItem()
         }, 2).energyCapacity(40000).energyPerTick(10000).register(plugin);
     }
 
@@ -558,9 +559,9 @@ public final class Meme_Expansion_setup
 
         new Grenade(Weapons, Meme_Expansion_item.GRENADE, 
         RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
-            SlimefunItems.DAMASCUS_STEEL_INGOT,new ItemStack(Material.FLINT_AND_STEEL),SlimefunItems.DAMASCUS_STEEL_INGOT,
-            SlimefunItems.DAMASCUS_STEEL_INGOT,new ItemStack(Material.TNT),SlimefunItems.DAMASCUS_STEEL_INGOT,
-            SlimefunItems.DAMASCUS_STEEL_INGOT,new ItemStack(Material.GUNPOWDER),SlimefunItems.DAMASCUS_STEEL_INGOT
+            null,new ItemStack(Material.FLINT_AND_STEEL),null,
+            SlimefunItems.DAMASCUS_STEEL_INGOT,new ItemStack(Material.GUNPOWDER),SlimefunItems.DAMASCUS_STEEL_INGOT,
+            null,SlimefunItems.DAMASCUS_STEEL_INGOT,null
         }).register(plugin);
 
         new StackEnchantment_Sword(Weapons, Meme_Expansion_item.STACKENCHANTMENT_SWORD,
@@ -575,6 +576,13 @@ public final class Meme_Expansion_setup
             null,null,null,
             Meme_Expansion_item.ZOMBIE_STICK,null,Meme_Expansion_item.ORPVPBOSS_STAR,
             null,null,null
+        }).register(plugin);
+
+        new ShenYIng_Stick(Weapons, Meme_Expansion_item.SHENYING_STICK,
+        RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+            null,null,new ItemStack(Material.DIAMOND),
+            null,SlimefunItems.STAFF_WIND,null,
+            new ItemStack(Material.BLAZE_ROD),null,null
         }).register(plugin);
     }
 

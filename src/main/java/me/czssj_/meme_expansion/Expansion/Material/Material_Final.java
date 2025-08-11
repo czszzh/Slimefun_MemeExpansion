@@ -3,6 +3,7 @@ package me.czssj_.meme_expansion.Expansion.Material;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,6 +19,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import me.czssj_.meme_expansion.Meme_Expansion;
 import me.czssj_.meme_expansion.setup.Meme_Expansion_item;
 
 public class Material_Final extends SlimefunItem implements Listener, RecipeDisplayItem, NotPlaceable
@@ -32,6 +34,7 @@ public class Material_Final extends SlimefunItem implements Listener, RecipeDisp
     {
         ItemUseHandler itemUseHandler = this::itemRightClick;
         addItemHandler(itemUseHandler);
+        Bukkit.getPluginManager().registerEvents(this, Meme_Expansion.getInstance());
     }
 
     private void itemRightClick(PlayerRightClickEvent event)
@@ -43,7 +46,7 @@ public class Material_Final extends SlimefunItem implements Listener, RecipeDisp
     public void onPlayerAdvancement(PlayerAdvancementDoneEvent event) 
     {
         Player player = event.getPlayer();
-        if (event.getAdvancement().getKey().getKey().equals("nether/all_effects")) 
+        if (event.getAdvancement().getKey().getKey().contains("nether/all_effects")) 
         {
             player.getInventory().addItem(Meme_Expansion_item.MATERIAL_FINAL);
         }

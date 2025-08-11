@@ -23,6 +23,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemDropHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
+import me.czssj_.meme_expansion.Expansion.Items.AmuletBackpack;
 import me.czssj_.meme_expansion.Meme_Expansion;
 
 public abstract class AbstractAmulet extends SlimefunItem 
@@ -85,6 +86,12 @@ public abstract class AbstractAmulet extends SlimefunItem
         
         if (!enabled) 
         {
+            if (hasAmuletBackpack(player) && (player.getInventory().getItemInMainHand().equals(item) || player.getInventory().getItemInOffHand().equals(item))) 
+            {
+                player.sendMessage("§c你携带了护符背包,请将护符放入护符背包!");
+                return;
+            }
+            
             int count = activeAmuletsCount.getOrDefault(player, 0);
             if (count >= MAX_ACTIVE_AMULETS) 
             {
@@ -191,5 +198,14 @@ public abstract class AbstractAmulet extends SlimefunItem
     public boolean isEnabled() 
     {
         return enabled;
+    }
+    
+    private boolean hasAmuletBackpack(Player player) 
+    {
+        for (ItemStack item : player.getInventory().getContents()) 
+        {
+            if (item != null && SlimefunItem.getByItem(item) instanceof AmuletBackpack) return true;
+        }
+        return false;
     }
 }

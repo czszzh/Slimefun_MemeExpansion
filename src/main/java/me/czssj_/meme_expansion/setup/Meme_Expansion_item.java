@@ -603,6 +603,17 @@ public class Meme_Expansion_item
     );
 
     //weapons
+    public static final SlimefunItemStack SHENYING_STICK = new SlimefunItemStack(
+        "EXPANSION_SHENYING_STICK",
+        Material.STICK,
+        "§8神鹰黑手の棒",
+        "",
+        "—— 装B,让你飞起来!",
+        "",
+        "§a§l攻击时 §r§f有25%概率让目标§4飞起来!",
+        "§a§l右键 §r§f让自己§4飞起来!"
+    );
+
     public static final SlimefunItemStack FROST_TOUCH = new SlimefunItemStack(
         "EXPANSION_FROST_TOUCH",
         Material.DIAMOND_SWORD,
@@ -612,9 +623,7 @@ public class Meme_Expansion_item
         "",
         "§3在手上时",        
         "§a对周围生物每秒造成1点的伤害",
-        "§a概率冰冻对方",
-        "§3小声bb:作者是fvv,冰冻现在对玩家就是加了个缓慢BUFF",
-        "§3真正的冰冻效果以后再说("
+        "§a概率冰冻对方(?"
     );
 
     public static final SlimefunItemStack ONE_HIT_AXE = new SlimefunItemStack(
@@ -622,9 +631,9 @@ public class Meme_Expansion_item
         Material.GOLDEN_AXE,
         "§a§l秒人斧",
         "",
-        "§4一击必杀",
-        "§3只能使用一次"
-    );    
+        "§7只能使用一次",
+        ""
+    );
 
     public static final SlimefunItemStack GRENADE = new SlimefunItemStack(
         "EXPANSION_GRENADE",

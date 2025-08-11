@@ -1,7 +1,10 @@
 package me.czssj_.meme_expansion;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 import java.util.Scanner;
 import java.util.logging.Logger;
@@ -13,6 +16,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
@@ -119,39 +123,37 @@ public class Meme_Expansion extends JavaPlugin implements SlimefunAddon
 
             if (connection.getResponseCode() == 200) 
             {
-                Scanner scanner = new Scanner(connection.getInputStream());
-                StringBuilder jsonResponse = new StringBuilder();
-
-                while (scanner.hasNext()) 
+                StringBuilder jsonResponse;
+                try (Scanner scanner = new Scanner(connection.getInputStream())) 
                 {
-                    jsonResponse.append(scanner.nextLine());
+                    jsonResponse = new StringBuilder();
+                    while (scanner.hasNext()) jsonResponse.append(scanner.nextLine());
                 }
-                scanner.close();
 
                 JSONObject jsonObject = new JSONObject(jsonResponse.toString());
                 String latestVersion = jsonObject.getString("tag_name");
 
                 if (!getDescription().getVersion().equals(latestVersion)) 
                 {
-                    LOGGER.warning("发现新版本: " + latestVersion);
+                    LOGGER.warning(String.format("发现新版本: %s", latestVersion));
                     // 打印下载链接
                     String downloadUrl = jsonObject.getJSONArray("assets").getJSONObject(0).getString("browser_download_url");
-                    LOGGER.warning("下载链接: " + downloadUrl);
+                    LOGGER.warning(String.format("下载链接: %s", downloadUrl));
+
                 } 
                 else 
                 {
-                    LOGGER.info("当前已经是最新版本: " + latestVersion);
+                    LOGGER.info(String.format("当前已经是最新版本: %s", latestVersion));
                 }
             } 
             else 
             {
-                LOGGER.warning("无法检查更新,GitHub API 返回了 " + connection.getResponseCode());
+                LOGGER.warning(String.format("无法检查更新,GitHub API 返回了 %s", connection.getResponseCode()));
             }
         } 
-        catch (Exception e) 
+        catch (IOException | JSONException e) 
         {
-            LOGGER.severe("检查更新时发生错误: " + e.getMessage());
-            e.printStackTrace();
+            LOGGER.severe(String.format("检查更新时发生错误: %s", e.getMessage()));
         }
     }
 
@@ -165,11 +167,16 @@ public class Meme_Expansion extends JavaPlugin implements SlimefunAddon
             {
                 new X509TrustManager() 
                 {
+                    @Override
                     public X509Certificate[] getAcceptedIssuers() 
                     { 
                         return null; 
                     }
+
+                    @Override
                     public void checkClientTrusted(X509Certificate[] certs, String authType) {}
+                    
+                    @Override
                     public void checkServerTrusted(X509Certificate[] certs, String authType) {}
                 }
             };
@@ -184,9 +191,9 @@ public class Meme_Expansion extends JavaPlugin implements SlimefunAddon
             // 设置默认的主机名验证器，允许所有主机名
             HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -> true);
         } 
-        catch (Exception e) 
+        catch (KeyManagementException | NoSuchAlgorithmException e) 
         {
-            e.printStackTrace();
+            LOGGER.severe(String.format("配置 SSL 证书时发生错误: %s", e.getMessage()));
         }
     }
 }
