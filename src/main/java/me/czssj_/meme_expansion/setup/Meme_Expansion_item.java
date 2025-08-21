@@ -51,14 +51,35 @@ public class Meme_Expansion_item
     );
 
     //materials
-    public static final SlimefunItemStack CONCENTRATED_MAGIC_LUMP = new SlimefunItemStack(
-        "EXPANSION_CONCENTRATED_MAGIC_LUMP",
+    public static final SlimefunItemStack MEME_PIECE_1 = new SlimefunItemStack(
+        "EXPANSION_MEME_PIECE_1",
+        Material.GHAST_TEAR,
+        "§e迷因碎片 §f- §eI",
+        "?"
+    );
+
+    public static final SlimefunItemStack MEME_PIECE_2 = new SlimefunItemStack(
+        "EXPANSION_MEME_PIECE_2",
+        Material.GHAST_TEAR,
+        "§e迷因碎片 §f- §eII",
+        "?"
+    );
+
+    public static final SlimefunItemStack MEME_PIECE_3 = new SlimefunItemStack(
+        "EXPANSION_MEME_PIECE_3",
+        Material.GHAST_TEAR,
+        "§e迷因碎片 §f- §eIII",
+        "?"
+    );
+
+    public static final SlimefunItemStack COMPRESSED_MAGIC_LUMP = new SlimefunItemStack(
+        "EXPANSION_COMPRESSED_MAGIC_LUMP",
         Material.GOLD_INGOT,
         "§e压缩魔法结晶"
     );
 
-    public static final SlimefunItemStack CONCENTRATED_ICE = new SlimefunItemStack(
-        "EXPANSION_CONCENTRATED_ICE",
+    public static final SlimefunItemStack COMPRESSED_ICE = new SlimefunItemStack(
+        "EXPANSION_COMPRESSED_ICE",
         Material.BLUE_ICE,
         "§b压缩冰",
         "",
@@ -212,6 +233,33 @@ public class Meme_Expansion_item
         ""
     );
 
+    public static final SlimefunItemStack COMPRESSED_BASALT_1 = new SlimefunItemStack(
+        "EXPANSION_COMPRESSED_BASALT_1",
+        Material.BASALT,
+        "§8压缩玄武岩",
+        "",
+        "§6MAKE 玄武岩 GREAT AGAIN!",
+        ""
+    );
+
+    public static final SlimefunItemStack COMPRESSED_BASALT_2 = new SlimefunItemStack(
+        "EXPANSION_COMPRESSED_BASALT_2",
+        "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWI4MDAwNDVhOWY1M2MxMjY5M2FiYzkwZDY1YmU1MTY3NGI3YjZiYTRjMDNjNmU3ZGI3NTI0OTg0ODQ0MmE4YyJ9fX0=",
+        "§8二次压缩玄武岩",
+        "",
+        "§6MAKE 玄武岩 GREAT AGAIN!",
+        ""
+    );
+
+    public static final SlimefunItemStack BASALT_CORE = new SlimefunItemStack(
+        "EXPANSION_BASALT_CORE",
+        "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGJlMmMxYjhhZWU3ZGIwMTA2NTllN2Y0Njc3NjJjOGRmOTE2MDJjNDA1NmU3NmVmYjMwMTNiMDAxMmI1NjkxIn19fQ==",
+        "§8玄武岩核心",
+        "",
+        "§7想方设法让玄武岩有点用处...",
+        ""
+    );
+
     public static final SlimefunItemStack MATERIAL_FINAL = new SlimefunItemStack(
         "EXPANSION_MATERIAL_FINAL",
         Material.BUCKET,
@@ -260,6 +308,17 @@ public class Meme_Expansion_item
     );
 
     //machines
+    public static final SlimefunItemStack MEME_GENERATOR = new SlimefunItemStack(
+        "EXPANSION_MEME_GENERATOR",
+        Material.EMERALD_BLOCK,
+        "§6迷因发生器",
+        "",
+        "§7获取迷因事件",
+        "§7本附属的基础物品来源",
+        "",
+        LoreBuilder.powerPerSecond(2)
+    );
+
     public static final SlimefunItemStack EXPANSION_BREWING_STAND = new SlimefunItemStack(
         "EXPANSION_BREWING_STAND",
         Material.BREWING_STAND,
@@ -269,7 +328,6 @@ public class Meme_Expansion_item
         "",
         "§4终极 机器",
         LoreBuilder.speed(6),
-        "§8⇨ §e⚡§7 400 J 可存储",
         LoreBuilder.powerPerSecond(80)
     );
 
@@ -283,7 +341,6 @@ public class Meme_Expansion_item
         "§0怎么做到的,有点神奇了",
         "§a基础 机器",
         LoreBuilder.speed(1),
-        "§8⇨ §e⚡§7 100 J 可存储",
         LoreBuilder.powerPerSecond(20)
     );
 
@@ -297,7 +354,6 @@ public class Meme_Expansion_item
         "§0怎么做到的,有点神奇了",
         "§6高级 机器",
         LoreBuilder.speed(4),
-        "§8⇨ §e⚡§7 400 J 可存储",
         LoreBuilder.powerPerSecond(80)
     );
 
@@ -333,7 +389,6 @@ public class Meme_Expansion_item
         "",
         "§a基础 机器",
         "§3§o电力模式下:",
-        "§8⇨ §e⚡§7 100 J 可存储",
         LoreBuilder.powerPerSecond(50)
     );
     
@@ -346,7 +401,6 @@ public class Meme_Expansion_item
         "",
         "§6高级 机器",
         "§3§o电力模式下:",
-        "§8⇨ §e⚡§7 200 J 可存储",
         LoreBuilder.powerPerSecond(100)
     );
 
@@ -359,7 +413,6 @@ public class Meme_Expansion_item
         "",
         "§4终极 机器",
         "§3§o电力模式下:",
-        "§8⇨ §e⚡§7 500 J 可存储",
         LoreBuilder.powerPerSecond(250)
     );
 
@@ -373,7 +426,6 @@ public class Meme_Expansion_item
         "",
         "§6高级 机器",
         LoreBuilder.speed(1),
-        "§8⇨ §e⚡§7 500 J 可存储",
         LoreBuilder.powerPerSecond(250)
     );
 
@@ -387,7 +439,6 @@ public class Meme_Expansion_item
         "",
         "§4终极 机器",
         LoreBuilder.speed(4),
-        "§8⇨ §e⚡§7 2000 J 可存储",
         LoreBuilder.powerPerSecond(1000)
     );
 
@@ -401,7 +452,6 @@ public class Meme_Expansion_item
         "",
         "§6高级 机器",
         LoreBuilder.speed(1),
-        "§8⇨ §e⚡§7 1000 J 可存储",
         LoreBuilder.powerPerSecond(500)
     );
 
@@ -415,19 +465,8 @@ public class Meme_Expansion_item
         "",
         "§4终极 机器",
         LoreBuilder.speed(16),
-        "§8⇨ §e⚡§7 40000 J 可存储",
         LoreBuilder.powerPerSecond(20000)
     );
-
-    public static final SlimefunItemStack Meme_Generator = new SlimefunItemStack(
-        "EXPANSION_MEME_GENERATOR",
-        Material.EMERALD_BLOCK,
-        "§6迷因发生器",
-        "",
-        "",
-        ""
-    );
-
 
 
     //generators
@@ -440,7 +479,6 @@ public class Meme_Expansion_item
         "§7还能发电,有这种好事?",
         "",
         "§a发电机",
-        "§8⇨ §e⚡§7 114 J 可存储",
         LoreBuilder.powerPerSecond(24)
     );
 
@@ -453,7 +491,6 @@ public class Meme_Expansion_item
         "§7将圆石转化为岩浆块",
         "",
         "§6发电机",
-        "§8⇨ §e⚡§7 400 J 可存储",
         LoreBuilder.powerPerSecond(40)
     );
 
@@ -468,7 +505,6 @@ public class Meme_Expansion_item
         "",
         "§4终极 发电机",
         LoreBuilder.speed(4),
-        "§8⇨ §e⚡§7 16384 J 可存储",
         LoreBuilder.powerPerSecond(2000)
     );
 
@@ -483,12 +519,41 @@ public class Meme_Expansion_item
         "",
         "§4终极 发电机",
         LoreBuilder.speed(4),
-        "§8⇨ §e⚡§7 32768 J 可存储",
         LoreBuilder.powerPerSecond(4096),
         "§8⇨ §4不会导致附近的生物获得凋零效果"
     );
     
     //items
+    public static final SlimefunItemStack MEME_1 = new SlimefunItemStack(
+        "EXPANSION_MEME_1",
+        Material.PAPER,
+        "§7迷因§f﹝§8粪§f﹞",
+        "",
+        "§3搬粪这一块...",
+        "&7未激活",
+        ""
+    );
+
+    public static final SlimefunItemStack MEME_2 = new SlimefunItemStack(
+        "EXPANSION_MEME_2",
+        Material.PAPER,
+        "§7迷因§f﹝§6典§f﹞",
+        "",
+        "§3梗百科?你这也不全啊",
+        "&7未激活",
+        ""
+    );
+
+    public static final SlimefunItemStack MEME_3 = new SlimefunItemStack(
+        "EXPANSION_MEME_3",
+        Material.PAPER,
+        "§7迷因§f﹝§4?§f﹞",
+        "",
+        "§r§k1§r§3解构,递进,斗争,循环§r§k1",
+        "&7未激活",
+        ""
+    );
+
     private static final ItemStack badomen_potion = new ItemStack(Material.POTION);
     private static final PotionMeta badomen_meta = (PotionMeta) badomen_potion.getItemMeta();
     static

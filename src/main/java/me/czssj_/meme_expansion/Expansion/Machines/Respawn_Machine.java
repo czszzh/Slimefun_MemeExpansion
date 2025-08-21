@@ -252,7 +252,7 @@ public class Respawn_Machine extends AbstractMachineBlock
     {
         int index = random.nextInt(RANDOM_ITEMS.length);
         SlimefunItemStack currentDisplay = RANDOM_ITEMS[index];
-        menu.replaceExistingItem(DISPLAY_SLOT, new CustomItemStack(currentDisplay, "§a本次复活赛获胜者", "see you again~"));
+        menu.replaceExistingItem(DISPLAY_SLOT, new CustomItemStack(currentDisplay, currentDisplay.getDisplayName(), "§a本次复活赛获胜者", "see you again~"));
         setCurrentDisplay(l, currentDisplay);
     }
 
