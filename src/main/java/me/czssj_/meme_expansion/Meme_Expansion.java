@@ -40,6 +40,7 @@ public class Meme_Expansion extends JavaPlugin implements SlimefunAddon
         {
             checkForUpdates();
         }
+
         Meme_Expansion_setup.Material_setup(this);
         Meme_Expansion_setup.Item_setup(this);
         Meme_Expansion_setup.Machine_setup(this);
@@ -64,7 +65,7 @@ public class Meme_Expansion extends JavaPlugin implements SlimefunAddon
     @Override
     public String getBugTrackerURL() 
     {
-        return "https://github.com/czszzh/Meme_Expansion/issues";
+        return "https://github.com/czszzh/Slimefun_MemeExpansion/issues";
     }
 
     @Nonnull
@@ -116,7 +117,7 @@ public class Meme_Expansion extends JavaPlugin implements SlimefunAddon
         configureSslContext();
         try 
         {
-            String apiUrl = "https://api.github.com/repos/czszzh/Meme_Expansion/releases/latest";
+            String apiUrl = "https://api.github.com/repos/czszzh/Slimefun_MemeExpansion/releases/latest";
             HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
             connection.setRequestMethod("GET");
             connection.connect();
